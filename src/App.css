@@ -8,11 +8,17 @@
   --text-dark: #3e2723;
 }
 
+html {
+  background-color: var(--bg-color);
+}
+
 body {
-  margin: 0; padding: 20px;
+  margin: 0; 
+  padding: 20px;
   background-color: var(--bg-color);
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color: #ffffff;
+  overflow-x: hidden; /* This completely locks the screen from swiping sideways */
 }
 
 h1 {
