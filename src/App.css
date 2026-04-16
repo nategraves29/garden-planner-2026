@@ -8,17 +8,32 @@
   --text-dark: #3e2723;
 }
 
-html {
+html, body {
   background-color: var(--bg-color);
+  margin: 0; 
+  padding: 0;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  overscroll-behavior-x: none; /* Modern fix to disable iOS rubber-banding */
 }
 
-body {
-  margin: 0; 
+#root {
   padding: 20px;
-  background-color: var(--bg-color);
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  color: #ffffff;
-  overflow-x: hidden; /* This completely locks the screen from swiping sideways */
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* This acts as the true cage for the application */
+}
+
+/* Make sure container doesn't accidentally stretch */
+.container { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding-bottom: 60px; 
+  width: 100%;
+  box-sizing: border-box;
 }
 
 h1 {
