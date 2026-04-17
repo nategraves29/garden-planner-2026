@@ -318,7 +318,7 @@ h1 {
   .btn-action { font-size: 16px; padding: 6px; }
 }
 
-/* 9. WEATHER DASHBOARD HUD */
+/* 9. WEATHER DASHBOARD HUD (OPEN-METEO 12-HR) */
 .weather-board {
   background-color: #823c11;
   border: 3px solid #4a2110;
@@ -327,27 +327,52 @@ h1 {
     inset 3px 3px 0px #a1501b, 
     inset -3px -3px 0px #36141a, 
     4px 4px 0px rgba(0,0,0,0.3); 
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 12px;
+  margin-bottom: 24px;
   display: flex;
-  justify-content: space-between; 
-  align-items: center;
+  flex-direction: column; /* Stack current weather above hourly forecast */
+  gap: 12px;
   color: #ffe5a9; 
   text-shadow: 2px 2px 0px #36141a;
-  gap: 5px;
 }
 
-.weather-divider {
-  width: 2px;
-  height: 40px;
-  background-color: #36141a;
-  box-shadow: 1px 0px 0px #a1501b; 
+.weather-current-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px dotted #a1501b;
+  padding-bottom: 8px;
 }
 
-.weather-stat { text-align: center; flex: 1; }
-.weather-label { font-size: 14px; color: #e8a25d; text-transform: uppercase; letter-spacing: 1px; }
-.weather-temp { font-size: 22px; margin-top: 2px; font-weight: bold; }
-.weather-desc { font-size: 14px; text-transform: capitalize; }
+.weather-stat { text-align: left; }
+.weather-label { font-size: 16px; color: #e8a25d; text-transform: uppercase; letter-spacing: 1px; }
+.weather-temp { font-size: 28px; margin-top: 2px; font-weight: bold; }
+.weather-desc { font-size: 16px; text-transform: capitalize; color: #f5cc85; }
+
+/* The Horizontal Swipable Ticker */
+.weather-hourly-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Custom retro scrollbar for the ticker */
+.weather-hourly-container::-webkit-scrollbar { height: 6px; }
+.weather-hourly-container::-webkit-scrollbar-thumb { background: #4a2110; border-radius: 3px; }
+
+.weather-hour-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 65px;
+  text-align: center;
+}
+
+.weather-hour-time { font-size: 14px; color: #e8a25d; margin-bottom: 4px; }
+.weather-hour-icon { font-size: 28px; margin-bottom: 2px; }
+.weather-hour-temp { font-size: 22px; font-weight: bold; }
 
 /* 10. STARDEW TIME HUD */
 .stardew-hud {

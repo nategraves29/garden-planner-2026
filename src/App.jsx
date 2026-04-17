@@ -120,15 +120,34 @@ const getRealDateTime = () => {
   return `${dateStr} • ${hours}:${minutesStr} ${ampm}`;
 };
 
-const getWeatherEmoji = (iconCode) => {
-  const map = {
-    '01d': '☀️', '01n': '🌙', '02d': '⛅', '02n': '☁️',
-    '03d': '☁️', '03n': '☁️', '04d': '☁️', '04n': '☁️',
-    '09d': '🌧️', '09n': '🌧️', '10d': '🌦️', '10n': '🌧️',
-    '11d': '⛈️', '11n': '⛈️', '13d': '❄️', '13n': '❄️',
-    '50d': '🌫️', '50n': '🌫️'
-  };
-  return map[iconCode] || '🌤️';
+// ==========================================
+// OPEN-METEO LOGIC
+// ==========================================
+const getWMOEmoji = (code, isNight = false) => {
+  if (code === 0) return isNight ? '🌙' : '☀️';
+  if (code === 1) return isNight ? '🌤️' : '🌤️';
+  if (code === 2) return '⛅';
+  if (code === 3) return '☁️';
+  if ([45, 48].includes(code)) return '🌫️';
+  if ([51, 53, 55, 56, 57].includes(code)) return '🌧️'; // Drizzle
+  if ([61, 63, 65, 66, 67].includes(code)) return '🌧️'; // Rain
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return '❄️'; // Snow
+  if ([80, 81, 82].includes(code)) return '🌦️'; // Showers
+  if ([95, 96, 99].includes(code)) return '⛈️'; // Thunderstorm
+  return '🌤️';
+};
+
+const getWMODesc = (code) => {
+  if (code === 0) return 'Clear';
+  if (code === 1) return 'Mostly Clear';
+  if (code === 2) return 'Partly Cloudy';
+  if (code === 3) return 'Overcast';
+  if ([45, 48].includes(code)) return 'Fog';
+  if ([51, 53, 55, 56, 57].includes(code)) return 'Drizzle';
+  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return 'Rain';
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return 'Snow';
+  if ([95, 96, 99].includes(code)) return 'Storms';
+  return 'Varied';
 };
 
 // ==========================================
@@ -189,7 +208,9 @@ export default function App() {
   const [showFieldGuide, setShowFieldGuide] = useState(false);
   const [timestamps, setTimestamps] = useState({});
   const [timestampsLoaded, setTimestampsLoaded] = useState(false);
-  const [weather, setWeather] = useState(null);
+  
+  // Weather Data State
+  const [weatherData, setWeatherData] = useState(null);
   const [timeData, setTimeData] = useState({ season: getStardewSeason(), realTime: getRealDateTime() });
   
   // Shop States
@@ -200,6 +221,7 @@ export default function App() {
   const [customName, setCustomName] = useState("");
   const [customQty, setCustomQty] = useState(1);
 
+  // 1. Clock Tracker
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeData({ season: getStardewSeason(), realTime: getRealDateTime() });
@@ -207,6 +229,7 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+  // 2. Firebase Load
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "gardenData", "chores"), (docSnap) => {
       if (docSnap.exists()) setTimestamps(docSnap.data());
@@ -219,26 +242,58 @@ export default function App() {
     return () => { unsub(); unsubShop(); };
   }, []);
 
+  // 3. Open-Meteo Weather Fetch
   useEffect(() => {
     if (!timestampsLoaded) return;
     const fetchWeather = async () => {
       try {
-        const apiKey = '33d438637f794339203a1ed6e9c071fc';
-        const loc = 'Beaverton,US'; 
-        const currentRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${loc}&units=imperial&appid=${apiKey}`);
-        const currentData = await currentRes.json();
-        const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${loc}&units=imperial&appid=${apiKey}`);
-        const forecastData = await forecastRes.json();
+        const lat = 45.43490497216875; // My Garden
+        const lon = -122.85666196045891;
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&hourly=temperature_2m,weather_code&temperature_unit=fahrenheit&precipitation_unit=inch&wind_speed_unit=mph&timezone=America%2FLos_Angeles&forecast_days=2`;
+        
+        const res = await fetch(url);
+        const data = await res.json();
 
-        if (currentData.cod === 200 && forecastData.cod === "200") {
-          setWeather({ current: currentData, forecast: forecastData });
-          const weatherId = currentData.weather[0].id;
-          if (weatherId >= 200 && weatherId < 600) {
-            const todayStr = new Date().toDateString();
-            if (timestamps['system']?.lastNatureWater !== todayStr) triggerNatureWatering(todayStr, timestamps);
-          }
+        // Extract Current
+        const currentTemp = data.current.temperature_2m;
+        const currentCode = data.current.weather_code;
+        
+        // Extract next 12 hours from the hourly array
+        const nowEpoch = new Date().getTime();
+        // Find the index of the hour that matches right now
+        const startIndex = data.hourly.time.findIndex(t => new Date(t).getTime() >= nowEpoch) || 0;
+        
+        const next12 = [];
+        for(let i=1; i<=12; i++) { // Skip index 0 (current hour) and grab the next 12
+           const tStr = data.hourly.time[startIndex + i];
+           const temp = data.hourly.temperature_2m[startIndex + i];
+           const code = data.hourly.weather_code[startIndex + i];
+           
+           // Format time like "3 PM"
+           const dateObj = new Date(tStr);
+           let hr = dateObj.getHours();
+           const ampm = hr >= 12 ? 'PM' : 'AM';
+           hr = hr % 12;
+           hr = hr ? hr : 12;
+
+           next12.push({ 
+             displayTime: `${hr} ${ampm}`, 
+             temp: temp, 
+             code: code,
+             isNight: dateObj.getHours() >= 18 || dateObj.getHours() < 6
+           });
         }
-      } catch (error) { console.error("Weather error", error); }
+
+        setWeatherData({ current: { temp: currentTemp, code: currentCode }, hourly: next12 });
+
+        // Auto Rain Logic using WMO Codes
+        const rainCodes = [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99];
+        if (rainCodes.includes(currentCode)) {
+          const todayStr = new Date().toDateString();
+          if (timestamps['system']?.lastNatureWater !== todayStr) triggerNatureWatering(todayStr, timestamps);
+        }
+
+      } catch (error) { console.error("Open-Meteo Weather error", error); }
     };
     fetchWeather();
   }, [timestampsLoaded]); 
@@ -319,6 +374,9 @@ export default function App() {
     plantAge = getPlantAge(info.name, timestamps);
     isPlanted = !!timestamps[info.name]?.planted;
   }
+
+  const currentHourNum = new Date().getHours();
+  const isCurrentlyNight = currentHourNum >= 18 || currentHourNum < 6;
 
   return (
     <div className="container">
@@ -424,13 +482,26 @@ export default function App() {
       {/* ========================================== */}
       {currentView === 'planner' && (
         <>
-          {weather && weather.current?.main && (
+          {weatherData && (
             <div className="weather-board">
-              <div className="weather-stat"><div className="weather-label">Current</div><div className="weather-temp">{Math.round(weather.current.main.temp)}° {getWeatherEmoji(weather.current.weather[0].icon)}</div></div>
-              <div className="weather-divider"></div>
-              <div className="weather-stat"><div className="weather-label">Next 3 Hrs</div><div className="weather-temp">{Math.round(weather.forecast.list[1].main.temp)}° {getWeatherEmoji(weather.forecast.list[1].weather[0].icon)}</div></div>
-              <div className="weather-divider"></div>
-              <div className="weather-stat"><div className="weather-label">Tomorrow</div><div className="weather-temp">{Math.round(weather.forecast.list[8].main.temp)}° {getWeatherEmoji(weather.forecast.list[8].weather[0].icon)}</div></div>
+              <div className="weather-current-header">
+                <div className="weather-stat">
+                  <div className="weather-label">Current Setup</div>
+                  <div className="weather-temp">{Math.round(weatherData.current.temp)}° {getWMOEmoji(weatherData.current.code, isCurrentlyNight)}</div>
+                  <div className="weather-desc">{getWMODesc(weatherData.current.code)}</div>
+                </div>
+                <div style={{fontSize: '36px', paddingRight: '10px'}}>📍</div>
+              </div>
+              
+              <div className="weather-hourly-container">
+                {weatherData.hourly.map((hour, i) => (
+                  <div key={i} className="weather-hour-block">
+                    <div className="weather-hour-time">{hour.displayTime}</div>
+                    <div className="weather-hour-icon">{getWMOEmoji(hour.code, hour.isNight)}</div>
+                    <div className="weather-hour-temp">{Math.round(hour.temp)}°</div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
