@@ -1,5 +1,5 @@
 /* ==========================================
-   MOBILE-OPTIMIZED STARDEW VALLEY UI
+   FLUID MOBILE STARDEW VALLEY UI
    ========================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
@@ -13,12 +13,12 @@
 html, body {
   margin: 0;
   padding: 0;
-  min-height: 100vh; /* Forces background to fill screen */
-  background-color: #5ea740; /* The requested brighter green */
+  min-height: 100vh;
+  background-color: #5ea740;
   background-image: radial-gradient(#529636 15%, transparent 16%), radial-gradient(#529636 15%, transparent 16%);
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px;
-  background-attachment: fixed; /* Keeps background still when scrolling */
+  background-attachment: fixed; 
   font-family: 'VT323', monospace;
   color: #36141a; 
   -webkit-font-smoothing: none; 
@@ -26,7 +26,7 @@ html, body {
 }
 
 body {
-  padding: 10px; /* Slimmer outer edge */
+  padding: 10px;
 }
 
 /* 2. THE MASTER INVENTORY MENU */
@@ -40,11 +40,10 @@ body {
   box-shadow: 
     inset 4px 4px 0px #ffe5a9,  
     inset -4px -4px 0px #d4a055, 
-    6px 6px 0px rgba(0,0,0,0.3); /* Scaled down drop shadow */
-  padding: 15px; /* Slimmer padding */
+    6px 6px 0px rgba(0,0,0,0.3); 
+  padding: 15px; 
 }
 
-/* SCALED DOWN TEXT FOR MOBILE */
 h1 {
   text-align: center;
   color: #f7de4d; 
@@ -54,7 +53,7 @@ h1 {
     -2px  2px 0 #823c11,
      2px  2px 0 #823c11, 
      3px  3px 0 #36141a;  
-  font-size: 38px; /* Fits on one line */
+  font-size: 38px; 
   margin-top: 0;
   margin-bottom: 5px;
   letter-spacing: 2px;
@@ -70,7 +69,7 @@ h1 {
   line-height: 1.2;
 }
 
-/* 9. WEATHER DASHBOARD HUD (Mobile Sized) */
+/* 9. WEATHER DASHBOARD HUD */
 .weather-board {
   background-color: #823c11;
   border: 3px solid #4a2110;
@@ -82,7 +81,7 @@ h1 {
   padding: 10px;
   margin-bottom: 20px;
   display: flex;
-  justify-content: space-between; /* Keeps them from overlapping */
+  justify-content: space-between; 
   align-items: center;
   color: #ffe5a9; 
   text-shadow: 2px 2px 0px #36141a;
@@ -105,7 +104,7 @@ h1 {
 .bed-header {
   background-color: #d17c38;
   color: #ffe5a9;
-  padding: 8px 10px;
+  padding: 10px;
   font-size: 22px;
   letter-spacing: 1px;
   text-shadow: 2px 2px 0px #36141a;
@@ -117,13 +116,16 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* Allows long bed titles to drop to a second line safely */
+  line-height: 1.1;
+  gap: 8px;
 }
 
 .bed-header:active {
   transform: translate(3px, 3px); 
   box-shadow: inset 3px 3px 0px #a1501b, inset -3px -3px 0px #e8a25d; 
 }
-.bed-header-icon { font-size: 16px; color: #fff; text-shadow: none; }
+.bed-header-icon { font-size: 16px; color: #fff; text-shadow: none; white-space: nowrap; }
 
 /* 4. HOED DIRT PATCHES (GRIDS) */
 .bed-section {
@@ -136,14 +138,14 @@ h1 {
 
 .grid-6, .grid-3 {
   display: grid;
-  gap: 4px; /* Tighter spacing so blocks fit on phone */
+  gap: 4px; 
 }
 .grid-6 { grid-template-columns: repeat(6, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 
 .flex-row {
   display: flex;
-  flex-direction: column; /* FIX 3: Stacks Bed 4, 5, & 6 vertically on phones */
+  flex-direction: column; 
   gap: 15px;
   margin-bottom: 24px;
 }
@@ -152,22 +154,24 @@ h1 {
 }
 .flex-col { flex: 1; }
 
-/* 5. INDIVIDUAL CROP BLOCKS */
+/* 5. INDIVIDUAL CROP BLOCKS - THE CUTOFF FIX */
 .grid-item {
-  aspect-ratio: 1 / 1;
+  /* Removed aspect-ratio and overflow:hidden so blocks can stretch vertically */
+  min-height: 70px; 
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 13px; /* Scaled down */
-  padding: 2px;
+  font-size: 13px; 
+  padding: 6px 2px; /* More vertical breathing room */
   cursor: pointer;
   border: 2px solid #36141a; 
   box-shadow: inset 2px 2px 0px rgba(255,255,255,0.4), inset -2px -2px 0px rgba(0,0,0,0.3);
   position: relative;
-  overflow: hidden; /* Stops text from overflowing block */
   word-wrap: break-word;
+  line-height: 1.1; /* Keeps stacked text tighter */
 }
 
 .grid-item:active {
@@ -190,7 +194,7 @@ h1 {
 .method-badge {
   font-size: 10px;
   color: #36141a;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 /* 6. NPC DIALOGUE MODALS */
@@ -201,7 +205,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px; /* Prevents edge-to-edge stretching on phones */
+  padding: 10px; 
   z-index: 1000;
 }
 
@@ -209,7 +213,7 @@ h1 {
   background: #f5cc85; 
   width: 100%;
   max-width: 500px;
-  max-height: 85vh; /* Prevents pushing off top of screen */
+  max-height: 85vh; 
   overflow-y: auto;
   border: 4px solid #823c11;
   outline: 4px solid #36141a;
@@ -227,6 +231,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 3px 0px #d4a055;
+  line-height: 1.1;
 }
 
 /* 7. CHUNKY INTERACTION BUTTONS */
@@ -240,6 +245,7 @@ h1 {
   width: 36px;
   height: 36px;
   box-shadow: inset 2px 2px 0px rgba(255,255,255,0.4), inset -2px -2px 0px rgba(0,0,0,0.4);
+  flex-shrink: 0; /* Prevents the close button from getting squished by long titles */
 }
 
 .close-btn:active {
@@ -251,10 +257,12 @@ h1 {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap; /* Allows buttons to stack if screen is too narrow */
 }
 
 .btn-action {
   flex: 1;
+  min-width: 120px; /* Ensures buttons don't shrink too small */
   padding: 10px;
   font-size: 20px;
   font-family: 'VT323', monospace;
@@ -263,7 +271,8 @@ h1 {
   border: 3px solid #36141a;
   box-shadow: inset 3px 3px 0px rgba(255,255,255,0.4), inset -3px -3px 0px rgba(0,0,0,0.4), 3px 3px 0px rgba(0,0,0,0.3);
   cursor: pointer;
-  margin: 0; /* Clear default button margins */
+  margin: 0; 
+  line-height: 1.1;
 }
 
 .btn-action:active {
@@ -294,6 +303,16 @@ h1 {
   border-bottom: 3px dotted #d4a055;
   padding: 8px 0;
   font-size: 18px;
+  gap: 15px;
+}
+
+.data-label {
+  flex-shrink: 0; /* Prevents labels from squishing */
+}
+
+.data-value {
+  text-align: right;
+  word-wrap: break-word; /* Prevents long values from breaking out */
 }
 
 .info-box {
