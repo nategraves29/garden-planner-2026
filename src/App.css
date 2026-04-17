@@ -391,3 +391,96 @@ h1 {
   .sd-time-row { font-size: 24px; }
   .sd-icon { font-size: 18px; }
 }
+
+/* 11. PIERRE'S SHOP & INPUT STYLES */
+.sd-input, .sd-select {
+  background: #ffe5a9;
+  border: 3px solid #823c11;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  padding: 10px;
+  color: #36141a;
+  outline: none;
+  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sd-select {
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.sd-input:focus, .sd-select:focus {
+  border-color: #36141a;
+  background: #fff;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.qty-btn {
+  background: #d4a055;
+  border: 3px solid #823c11;
+  color: #36141a;
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  box-shadow: inset 2px 2px 0px rgba(255,255,255,0.4), inset -2px -2px 0px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qty-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.4);
+}
+
+.qty-input {
+  width: 60px;
+  text-align: center;
+  padding: 8px;
+}
+
+.shop-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #d4a055;
+  border: 3px solid #823c11;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: inset 2px 2px 0px rgba(255,255,255,0.2), 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+.shop-item.checked {
+  background: #8a4729;
+  color: #ffe5a9;
+  border-color: #4a2110;
+  text-decoration: line-through;
+  opacity: 0.8;
+  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.3);
+}
+
+.shop-qty-badge {
+  background: #36141a;
+  color: #f7de4d;
+  font-size: 18px;
+  padding: 4px 8px;
+  border: 2px solid #823c11;
+}
+
+/* Adjust HUD for the new layout */
+.sd-time-row {
+  font-size: 22px;
+  letter-spacing: 1px;
+}
