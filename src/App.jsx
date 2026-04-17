@@ -51,10 +51,10 @@ const plantDatabase = {
 };
 
 const masterCatalog = {
-  "🌱 Seed Packets": ["Radish Seeds", "Carrot Seeds", "Lettuce Seeds", "Arugula Seeds", "Spinach Seeds", "Pea Seeds", "Green Bean Seeds", "Cucumber Seeds", "Nasturtium Seeds", "Calendula Seeds"],
-  "🪴 Transplants": ["Red Onion Starts", "Yellow Onion Starts", "Broccoli Start", "Kale Start", "Collard Greens Start", "Roma Tomato Start", "Beefsteak Start", "Cherry Tomato Start", "Tomatillo Start", "Basil Start", "Thai Basil Start", "Bell Pepper Start", "Jalapeno Start", "Serrano Start", "Thai Hot Start", "Shishito Start", "Marigold Start"],
-  "🪨 Soils & Amendments": ["Organic Compost (Bag)", "Vermiculite (Bag)", "Fish Emulsion (5-1-1)", "Fruiting Fertilizer (2-8-4)", "Worm Blanket", "SubPod Carbon Bedding"],
-  "🛠️ Hardware": ["Drip Tubing (1/2\")", "Drip Emitters", "Irrigation Stakes", "Tomato Cages", "Trellis Netting", "Korean EZ Digger", "Pruning Snips", "Twine"]
+  "🌱 Seed Packets": ["Radish Seeds", "Carrot Seeds", "Beet Seeds", "Lettuce Seeds", "Arugula Seeds", "Spinach Seeds", "Swiss Chard Seeds", "Pea Seeds", "Green Bean Seeds", "Cucumber Seeds", "Zucchini Seeds", "Butternut Squash Seeds", "Pumpkin Seeds", "Sweet Corn Seeds", "Red Onion Seeds", "Yellow Onion Seeds", "Broccoli Seeds", "Cabbage Seeds", "Kale Seeds", "Collard Greens Seeds", "Roma Tomato Seeds", "Beefsteak Tomato Seeds", "Cherry Tomato Seeds", "Tomatillo Seeds", "Eggplant Seeds", "Bell Pepper Seeds", "Jalapeno Seeds", "Serrano Seeds", "Thai Hot Seeds", "Shishito Seeds", "Basil Seeds", "Thai Basil Seeds", "Cilantro Seeds", "Parsley Seeds", "Marigold Seeds", "Nasturtium Seeds", "Calendula Seeds", "Sunflower Seeds"],
+  "🪴 Transplants": ["Lettuce Starts", "Arugula Starts", "Spinach Starts", "Swiss Chard Starts", "Pea Starts", "Green Bean Starts", "Cucumber Starts", "Zucchini Starts", "Butternut Squash Starts", "Pumpkin Starts", "Sweet Corn Starts", "Red Onion Starts", "Yellow Onion Starts", "Broccoli Starts", "Cabbage Starts", "Kale Starts", "Collard Greens Starts", "Roma Tomato Starts", "Beefsteak Starts", "Cherry Tomato Starts", "Tomatillo Starts", "Eggplant Starts", "Bell Pepper Starts", "Jalapeno Starts", "Serrano Starts", "Thai Hot Starts", "Shishito Starts", "Basil Starts", "Thai Basil Starts", "Cilantro Starts", "Parsley Starts", "Marigold Starts", "Nasturtium Starts", "Calendula Starts", "Sunflower Starts"],
+  "🪨 Soils & Amendments": ["Organic Compost (Bag)", "Potting Soil (Bag)", "Coco Coir (Brick)", "Vermiculite (Bag)", "Perlite (Bag)", "Fish Emulsion (5-1-1)", "Fruiting Fertilizer (2-8-4)", "Bone Meal", "Blood Meal", "Kelp Meal", "Mycorrhizal Fungi", "Worm Blanket", "SubPod Carbon Bedding", "Straw Mulch"],
+  "🛠️ Hardware": ["Drip Tubing (1/2\")", "Drip Tubing (1/4\")", "Drip Emitters", "Irrigation Stakes", "Hose Timer", "Tomato Cages", "Trellis Netting", "Korean EZ Digger", "Pruning Snips", "Twine", "Seedling Trays", "Heat Mat", "Grow Lights", "Plant Tags", "Neem Oil", "Slug/Snail Bait", "Frost Cover"]
 };
 
 const getPlantData = (plantName) => {
@@ -322,7 +322,7 @@ export default function App() {
 
   return (
     <div className="container">
-      <h1>{currentView === 'planner' ? "GARDEN PLANNER 2026" : "PIERRE'S SHOP"}</h1>
+      <h1>{currentView === 'planner' ? "GARDEN PLANNER 2026" : "CAROL'S SHOP"}</h1>
       
       {/* STARDEW DATE & TIME HUD */}
       <div className="stardew-hud">
@@ -344,7 +344,7 @@ export default function App() {
           onClick={() => setCurrentView('shop')}
           style={{ opacity: currentView === 'shop' ? 1 : 0.5, backgroundColor: currentView === 'shop' ? '#d62828' : '#823c11' }}
         >
-          🛒 Pierre's Shop
+          🛒 Carol's Shop
         </button>
       </div>
 
