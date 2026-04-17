@@ -1,8 +1,9 @@
 /* ==========================================
-   STARDEW VALLEY UI - SCROLLABLE BEDS FIX
+   STARDEW VALLEY UI - SCROLLABLE BEDS & NEW TITLE
    ========================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 
 /* FIX 1: Kill the white void on the right side forever */
 html {
@@ -50,6 +51,7 @@ body {
 }
 
 h1 {
+  font-family: 'Silkscreen', sans-serif;
   text-align: center;
   color: #f7de4d; 
   text-shadow: 
@@ -58,12 +60,10 @@ h1 {
     -2px  2px 0 #823c11,
      2px  2px 0 #823c11, 
      3px  3px 0 #36141a;  
-  font-size: 38px; 
+  font-size: 32px; 
   margin-top: 0;
-  margin-bottom: 5px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  line-height: 1;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
 }
 
 .subtitle {
@@ -139,10 +139,8 @@ h1 {
   border: 3px solid #4a2110;
   margin-bottom: 24px;
   box-shadow: inset 3px 3px 0px rgba(0,0,0,0.4), inset -3px -3px 0px rgba(255,255,255,0.1);
-  
-  /* FIX 2: Enable Horizontal Scrolling Inside the Bed! */
   overflow-x: auto; 
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch; 
 }
 
 .grid-6, .grid-3 {
@@ -150,10 +148,9 @@ h1 {
   gap: 6px; 
 }
 
-/* FIX 3: Force the grids to be wide enough so the blocks don't squish */
 .grid-6 { 
   grid-template-columns: repeat(6, 1fr); 
-  min-width: 650px; /* Forces scrolling on small screens */
+  min-width: 650px; 
 }
 .grid-3 { 
   grid-template-columns: repeat(3, 1fr); 
@@ -171,9 +168,9 @@ h1 {
 }
 .flex-col { flex: 1; }
 
-/* 5. INDIVIDUAL CROP BLOCKS - RETURN OF THE SQUARES */
+/* 5. INDIVIDUAL CROP BLOCKS */
 .grid-item {
-  aspect-ratio: 1 / 1; /* Brings back perfect squares */
+  aspect-ratio: 1 / 1; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -185,7 +182,7 @@ h1 {
   border: 2px solid #36141a; 
   box-shadow: inset 2px 2px 0px rgba(255,255,255,0.4), inset -2px -2px 0px rgba(0,0,0,0.3);
   position: relative;
-  overflow: hidden; /* Keeps text strictly inside the box */
+  overflow: hidden; 
   word-wrap: break-word;
   line-height: 1.1; 
 }
@@ -348,7 +345,6 @@ h1 {
 
 /* ULTRA TIGHT MOBILE SCALING */
 @media (max-width: 400px) {
-  h1 { font-size: 32px; }
   .weather-temp { font-size: 18px; }
   .btn-action { font-size: 16px; padding: 6px; }
 }
