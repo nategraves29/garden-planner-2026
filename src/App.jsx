@@ -473,6 +473,11 @@ export default function App() {
               <p><strong>Macro Rule 2 (The Late-Summer Stress):</strong> For fruiting crops like Tomatoes and Peppers, water is your enemy in late August. Once the fruit has set and reached full size, cut your watering volume by 50%. This mild drought stress forces the plant to stop producing leaves and concentrate all its sugars into ripening the fruit, dramatically increasing flavor and spice.</p>
               <p><strong>Macro Rule 3 (The Allium Halt):</strong> Onions are susceptible to rot. When the green tops of your onions flop over onto the soil (usually mid-summer), their growing cycle is finished. You must stop watering that bed entirely to allow the bulbs to cure in the dry dirt before harvesting.</p>
 
+              <div className="info-box-title" style={{ color: '#823c11', borderBottom: '3px dotted #823c11', paddingBottom: '5px', marginTop: '30px' }}>Fertilization Master Rules</div>
+              <p><strong>Rule 1 (The Seed Battery):</strong> NEVER fertilize seeds when direct sowing. A seed is a self-contained battery pack that has all the nutrients it needs. Adding fertilizer to a seed will chemically burn the emerging root. Wait 10-14 days until the first "True Leaves" appear.</p>
+              <p><strong>Rule 2 (The Transplant Trench):</strong> When planting nursery starts (Tomatoes, Peppers), place a small scoop of organic fertilizer at the very bottom of your hole. Cover it with an inch of plain dirt, then place the plant. The roots will discover the food naturally as they grow downward without suffering chemical shock.</p>
+              <p><strong>Rule 3 (The SubPod Exception):</strong> Bed 1 is a living nutrient engine. The worms are constantly pushing castings and "worm tea" into the surrounding dirt. Direct sow crops in this bed rarely need supplemental feeding unless they look visibly yellow and starved.</p>
+
             </div>
           </div>
         </div>
