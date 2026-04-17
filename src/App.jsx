@@ -223,31 +223,18 @@ const getStardewDate = () => {
   const now = new Date();
   const month = now.getMonth(); 
   let season = "Spring";
-  let daysPassed = 0;
 
-  if (month >= 2 && month <= 4) { // Mar, Apr, May
-    season = "Spring";
-    const start = new Date(now.getFullYear(), 2, 1);
-    daysPassed = Math.floor((now - start) / (1000 * 60 * 60 * 24));
-  } else if (month >= 5 && month <= 7) { // Jun, Jul, Aug
-    season = "Summer";
-    const start = new Date(now.getFullYear(), 5, 1);
-    daysPassed = Math.floor((now - start) / (1000 * 60 * 60 * 24));
-  } else if (month >= 8 && month <= 10) { // Sep, Oct, Nov
-    season = "Fall";
-    const start = new Date(now.getFullYear(), 8, 1);
-    daysPassed = Math.floor((now - start) / (1000 * 60 * 60 * 24));
-  } else { // Dec, Jan, Feb
-    season = "Winter";
-    let startYear = month === 11 ? now.getFullYear() : now.getFullYear() - 1;
-    const start = new Date(startYear, 11, 1);
-    daysPassed = Math.floor((now - start) / (1000 * 60 * 60 * 24));
-  }
+  // Match the real-world season
+  if (month >= 2 && month <= 4) season = "Spring"; // Mar, Apr, May
+  else if (month >= 5 && month <= 7) season = "Summer"; // Jun, Jul, Aug
+  else if (month >= 8 && month <= 10) season = "Fall"; // Sep, Oct, Nov
+  else season = "Winter"; // Dec, Jan, Feb
 
-  // Squeeze 90-92 real days down to exactly 28 Stardew Days
-  let stardewDay = Math.floor((daysPassed / 92) * 28) + 1;
+  // 1:1 Daily Sync: The Stardew day exactly matches the real day of the month
+  let stardewDay = now.getDate();
+  
+  // Stardew months only have 28 days. Cap the end of the real month at 28.
   if (stardewDay > 28) stardewDay = 28;
-  if (stardewDay < 1) stardewDay = 1;
 
   return { season, stardewDay };
 };
