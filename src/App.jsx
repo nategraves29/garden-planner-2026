@@ -133,7 +133,7 @@ const getCurrentPhase = (plantName, timestamps) => {
   if (!info || !info.phases) return null;
   
   const age = getPlantAge(plantName, timestamps);
-  if (age === null) return info.phases[0]; // Preview phase 1 if not planted
+  if (age === null) return info.phases[0]; 
   
   let current = info.phases[0];
   for (const phase of info.phases) {
@@ -157,6 +157,20 @@ const checkNeedsAttention = (plantName, timestamps, type) => {
   
   const daysSince = (new Date() - new Date(lastAction)) / (1000 * 60 * 60 * 24);
   return daysSince >= limit;
+};
+
+// ==========================================
+// WEATHER HELPER
+// ==========================================
+const getWeatherEmoji = (iconCode) => {
+  const map = {
+    '01d': '☀️', '01n': '🌙', '02d': '⛅', '02n': '☁️',
+    '03d': '☁️', '03n': '☁️', '04d': '☁️', '04n': '☁️',
+    '09d': '🌧️', '09n': '🌧️', '10d': '🌦️', '10n': '🌧️',
+    '11d': '⛈️', '11n': '⛈️', '13d': '❄️', '13n': '❄️',
+    '50d': '🌫️', '50n': '🌫️'
+  };
+  return map[iconCode] || '🌤️';
 };
 
 // ==========================================
@@ -215,15 +229,86 @@ export default function App() {
   const [selectedBed, setSelectedBed] = useState(null);
   const [showFieldGuide, setShowFieldGuide] = useState(false);
   const [timestamps, setTimestamps] = useState({});
+  const [timestampsLoaded, setTimestampsLoaded] = useState(false);
+  const [weather, setWeather] = useState(null);
 
+  // 1. Load Firebase Data
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "gardenData", "chores"), (docSnap) => {
       if (docSnap.exists()) {
         setTimestamps(docSnap.data());
       }
+      setTimestampsLoaded(true);
     });
     return () => unsub();
   }, []);
+
+  // 2. Load Weather & Execute Nature Watering
+  useEffect(() => {
+    if (!timestampsLoaded) return;
+
+    const fetchWeather = async () => {
+      try {
+        const apiKey = '33d438637f794339203a1ed6e9c071fc';
+        const loc = 'Beaverton,US'; 
+        
+        // Fetch Current Weather
+        const currentRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${loc}&units=imperial&appid=${apiKey}`);
+        const currentData = await currentRes.json();
+        
+        // Fetch Forecast
+        const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${loc}&units=imperial&appid=${apiKey}`);
+        const forecastData = await forecastRes.json();
+
+        setWeather({ current: currentData, forecast: forecastData });
+
+        // Logic Engine: Check for rain (Weather Codes 2xx, 3xx, 5xx)
+        const weatherId = currentData.weather[0].id;
+        const isRaining = weatherId >= 200 && weatherId < 600;
+
+        if (isRaining) {
+          const todayStr = new Date().toDateString();
+          const lastNatureWater = timestamps['system']?.lastNatureWater;
+
+          // If we haven't logged a rain event today, Nature Waters the garden!
+          if (lastNatureWater !== todayStr) {
+            triggerNatureWatering(todayStr, timestamps);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch weather data", error);
+      }
+    };
+
+    fetchWeather();
+    // eslint-disable-next-line
+  }, [timestampsLoaded]); 
+
+  const triggerNatureWatering = async (todayStr, currentData) => {
+    const now = new Date().toISOString();
+    const newData = { ...currentData }; 
+
+    // Automatically water everything that is planted
+    Object.keys(plantDatabase).forEach(plant => {
+      const info = plantDatabase[plant];
+      if (info.method !== "-" && info.method !== "INFRASTRUCTURE" && newData[plant]?.planted) {
+        newData[plant] = { ...newData[plant], watered: now };
+      }
+    });
+
+    // Save flag so it doesn't spam Firebase on reload
+    if (!newData['system']) newData['system'] = {};
+    newData['system'].lastNatureWater = todayStr;
+
+    await setDoc(doc(db, "gardenData", "chores"), newData, { merge: true });
+  };
+
+  const handleManualRainLog = () => {
+    if (window.confirm("Did it rain heavily today? This will log a 'Watered by Nature' event and reset the watering timers for all planted crops.")) {
+      const todayStr = new Date().toDateString();
+      triggerNatureWatering(todayStr, timestamps);
+    }
+  };
 
   const markAction = async (plantName, actionType) => {
     const now = new Date().toISOString();
@@ -258,15 +343,51 @@ export default function App() {
       <h1>GARDEN PLANNER 2026</h1>
       <div className="subtitle">
         Chronological Engine Active • Dim blocks await planting
-        <div style={{ marginTop: '15px' }}>
-          <button 
-            className="btn-action feed" 
-            style={{ width: '100%', padding: '10px', fontSize: '18px', backgroundColor: '#e0b084' }}
-            onClick={() => setShowFieldGuide(true)}
-          >
-            📖 Open Master Field Guide
-          </button>
+      </div>
+
+      {/* WEATHER DASHBOARD */}
+      {weather && (
+        <div style={{ background: 'rgba(0,0,0,0.2)', padding: '15px', borderRadius: '12px', marginBottom: '20px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', border: '2px solid rgba(255,255,255,0.1)' }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '12px', opacity: 0.8, textTransform: 'uppercase' }}>Current</div>
+            <div style={{ fontSize: '28px', fontWeight: 'bold' }}>
+              {Math.round(weather.current.main.temp)}° {getWeatherEmoji(weather.current.weather[0].icon)}
+            </div>
+            <div style={{ fontSize: '12px', textTransform: 'capitalize' }}>{weather.current.weather[0].description}</div>
+          </div>
+          <div style={{ width: '1px', height: '40px', background: 'rgba(255,255,255,0.2)' }}></div>
+          <div style={{ textAlign: 'center' }}>
+             <div style={{ fontSize: '12px', opacity: 0.8, textTransform: 'uppercase' }}>Next 3 Hrs</div>
+             <div style={{ fontSize: '20px', marginTop: '4px' }}>
+                {Math.round(weather.forecast.list[1].main.temp)}° {getWeatherEmoji(weather.forecast.list[1].weather[0].icon)}
+             </div>
+          </div>
+          <div style={{ width: '1px', height: '40px', background: 'rgba(255,255,255,0.2)' }}></div>
+          <div style={{ textAlign: 'center' }}>
+             <div style={{ fontSize: '12px', opacity: 0.8, textTransform: 'uppercase' }}>Tomorrow</div>
+             <div style={{ fontSize: '20px', marginTop: '4px' }}>
+                {Math.round(weather.forecast.list[8].main.temp)}° {getWeatherEmoji(weather.forecast.list[8].weather[0].icon)}
+             </div>
+          </div>
         </div>
+      )}
+
+      {/* GLOBAL ACTIONS ROW */}
+      <div style={{ marginBottom: '20px', display: 'flex', gap: '10px' }}>
+        <button 
+          className="btn-action feed" 
+          style={{ flex: 1, padding: '12px', fontSize: '16px', backgroundColor: '#e0b084', margin: 0 }}
+          onClick={() => setShowFieldGuide(true)}
+        >
+          📖 Field Guide
+        </button>
+        <button 
+          className="btn-action water" 
+          style={{ flex: 1, padding: '12px', fontSize: '16px', backgroundColor: '#457b9d', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', margin: 0 }}
+          onClick={handleManualRainLog}
+        >
+          🌧️ Log Rain Event
+        </button>
       </div>
 
       <GridRenderer bedId="bed1" title="BED 1 • Roots & Greens (6x3x2')" columns={6} data={bed1} onPlantClick={setSelectedPlant} onBedClick={setSelectedBed} timestamps={timestamps} />
