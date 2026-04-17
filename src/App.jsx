@@ -243,7 +243,7 @@ export default function App() {
     return () => unsub();
   }, []);
 
-  // 2. Load Weather & Execute Nature Watering
+  // 2. Load Weather & Execute Nature Watering (WITH SAFETY CHECK)
   useEffect(() => {
     if (!timestampsLoaded) return;
 
@@ -260,20 +260,25 @@ export default function App() {
         const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${loc}&units=imperial&appid=${apiKey}`);
         const forecastData = await forecastRes.json();
 
-        setWeather({ current: currentData, forecast: forecastData });
+        // SAFETY CHECK: Only set weather and run logic if the API key is active and returned actual data (Code 200)
+        if (currentData.cod === 200 && forecastData.cod === "200") {
+          setWeather({ current: currentData, forecast: forecastData });
 
-        // Logic Engine: Check for rain (Weather Codes 2xx, 3xx, 5xx)
-        const weatherId = currentData.weather[0].id;
-        const isRaining = weatherId >= 200 && weatherId < 600;
+          // Logic Engine: Check for rain (Weather Codes 2xx, 3xx, 5xx)
+          const weatherId = currentData.weather[0].id;
+          const isRaining = weatherId >= 200 && weatherId < 600;
 
-        if (isRaining) {
-          const todayStr = new Date().toDateString();
-          const lastNatureWater = timestamps['system']?.lastNatureWater;
+          if (isRaining) {
+            const todayStr = new Date().toDateString();
+            const lastNatureWater = timestamps['system']?.lastNatureWater;
 
-          // If we haven't logged a rain event today, Nature Waters the garden!
-          if (lastNatureWater !== todayStr) {
-            triggerNatureWatering(todayStr, timestamps);
+            // If we haven't logged a rain event today, Nature Waters the garden!
+            if (lastNatureWater !== todayStr) {
+              triggerNatureWatering(todayStr, timestamps);
+            }
           }
+        } else {
+          console.log("Weather API still activating or returned an error:", currentData.message);
         }
       } catch (error) {
         console.error("Failed to fetch weather data", error);
@@ -288,7 +293,6 @@ export default function App() {
     const now = new Date().toISOString();
     const newData = { ...currentData }; 
 
-    // Automatically water everything that is planted
     Object.keys(plantDatabase).forEach(plant => {
       const info = plantDatabase[plant];
       if (info.method !== "-" && info.method !== "INFRASTRUCTURE" && newData[plant]?.planted) {
@@ -296,7 +300,6 @@ export default function App() {
       }
     });
 
-    // Save flag so it doesn't spam Firebase on reload
     if (!newData['system']) newData['system'] = {};
     newData['system'].lastNatureWater = todayStr;
 
@@ -346,7 +349,7 @@ export default function App() {
       </div>
 
       {/* WEATHER DASHBOARD */}
-      {weather && (
+      {weather && weather.current?.main && (
         <div style={{ background: 'rgba(0,0,0,0.2)', padding: '15px', borderRadius: '12px', marginBottom: '20px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', border: '2px solid rgba(255,255,255,0.1)' }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '12px', opacity: 0.8, textTransform: 'uppercase' }}>Current</div>
