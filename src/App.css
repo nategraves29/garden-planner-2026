@@ -1,15 +1,19 @@
 /* ==========================================
-   FLUID MOBILE STARDEW VALLEY UI
+   STARDEW VALLEY UI - SCROLLABLE BEDS FIX
    ========================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-/* FIX 1: Prevent horizontal blowout globally */
+/* FIX 1: Kill the white void on the right side forever */
+html {
+  background-color: #5ea740;
+  overflow-x: hidden; /* Locks the page from sliding left/right */
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* FIX 2: Stop the white gap and bring back the good green */
 html, body {
   margin: 0;
   padding: 0;
@@ -27,6 +31,7 @@ html, body {
 
 body {
   padding: 10px;
+  overflow-x: hidden; /* Double lock for mobile Safari */
 }
 
 /* 2. THE MASTER INVENTORY MENU */
@@ -116,7 +121,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Allows long bed titles to drop to a second line safely */
+  flex-wrap: wrap; 
   line-height: 1.1;
   gap: 8px;
 }
@@ -134,14 +139,26 @@ h1 {
   border: 3px solid #4a2110;
   margin-bottom: 24px;
   box-shadow: inset 3px 3px 0px rgba(0,0,0,0.4), inset -3px -3px 0px rgba(255,255,255,0.1);
+  
+  /* FIX 2: Enable Horizontal Scrolling Inside the Bed! */
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .grid-6, .grid-3 {
   display: grid;
-  gap: 4px; 
+  gap: 6px; 
 }
-.grid-6 { grid-template-columns: repeat(6, 1fr); }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* FIX 3: Force the grids to be wide enough so the blocks don't squish */
+.grid-6 { 
+  grid-template-columns: repeat(6, 1fr); 
+  min-width: 650px; /* Forces scrolling on small screens */
+}
+.grid-3 { 
+  grid-template-columns: repeat(3, 1fr); 
+  min-width: 325px; 
+}
 
 .flex-row {
   display: flex;
@@ -154,24 +171,23 @@ h1 {
 }
 .flex-col { flex: 1; }
 
-/* 5. INDIVIDUAL CROP BLOCKS - THE CUTOFF FIX */
+/* 5. INDIVIDUAL CROP BLOCKS - RETURN OF THE SQUARES */
 .grid-item {
-  /* Removed aspect-ratio and overflow:hidden so blocks can stretch vertically */
-  min-height: 70px; 
-  height: 100%;
+  aspect-ratio: 1 / 1; /* Brings back perfect squares */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 13px; 
-  padding: 6px 2px; /* More vertical breathing room */
+  font-size: 14px; 
+  padding: 4px; 
   cursor: pointer;
   border: 2px solid #36141a; 
   box-shadow: inset 2px 2px 0px rgba(255,255,255,0.4), inset -2px -2px 0px rgba(0,0,0,0.3);
   position: relative;
+  overflow: hidden; /* Keeps text strictly inside the box */
   word-wrap: break-word;
-  line-height: 1.1; /* Keeps stacked text tighter */
+  line-height: 1.1; 
 }
 
 .grid-item:active {
@@ -245,7 +261,7 @@ h1 {
   width: 36px;
   height: 36px;
   box-shadow: inset 2px 2px 0px rgba(255,255,255,0.4), inset -2px -2px 0px rgba(0,0,0,0.4);
-  flex-shrink: 0; /* Prevents the close button from getting squished by long titles */
+  flex-shrink: 0; 
 }
 
 .close-btn:active {
@@ -257,12 +273,12 @@ h1 {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
-  flex-wrap: wrap; /* Allows buttons to stack if screen is too narrow */
+  flex-wrap: wrap; 
 }
 
 .btn-action {
   flex: 1;
-  min-width: 120px; /* Ensures buttons don't shrink too small */
+  min-width: 120px; 
   padding: 10px;
   font-size: 20px;
   font-family: 'VT323', monospace;
@@ -307,12 +323,12 @@ h1 {
 }
 
 .data-label {
-  flex-shrink: 0; /* Prevents labels from squishing */
+  flex-shrink: 0; 
 }
 
 .data-value {
   text-align: right;
-  word-wrap: break-word; /* Prevents long values from breaking out */
+  word-wrap: break-word; 
 }
 
 .info-box {
@@ -335,6 +351,4 @@ h1 {
   h1 { font-size: 32px; }
   .weather-temp { font-size: 18px; }
   .btn-action { font-size: 16px; padding: 6px; }
-  .grid-item { font-size: 11px; }
-  .qty-badge { font-size: 9px; }
 }
