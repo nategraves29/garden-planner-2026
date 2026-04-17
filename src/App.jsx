@@ -17,40 +17,99 @@ const bedDatabase = {
 };
 
 // ==========================================
-// PLANT DATABASE (WITH TIMERS)
+// DYNAMIC CHRONOLOGICAL PLANT DATABASE
 // ==========================================
 const plantDatabase = {
-  "Radishes": { color: "#ff8fab", method: "DIRECT SOW", quantity: "16 seeds", depth: "1/2 inch", harvest: "25-30 days", water: "Daily mist.", feed: "Light Fish Emulsion", pruning: "Snip weakest sprouts.", notes: "Lightning fast crop.", waterDays: 1, feedDays: 14 },
-  "Carrots": { color: "#ffb703", method: "DIRECT SOW", quantity: "9 seeds", depth: "1/4 inch", harvest: "70-80 days", water: "Needs daily moisture.", feed: "Light Fish Emulsion", pruning: "Dust with dirt, thin to 9.", notes: "Loose, rock-free soil.", waterDays: 1, feedDays: 21 },
-  "Buttercrunch & Romaine": { color: "#90be6d", method: "DIRECT SOW", quantity: "4 plants", depth: "Surface", harvest: "55-65 days", water: "Keep surface damp.", feed: "Light Fish Emulsion", pruning: "Harvest outer leaves.", notes: "Press seeds firmly.", waterDays: 2, feedDays: 14 },
-  "Arugula": { color: "#73a942", method: "DIRECT SOW", quantity: "9 plants", depth: "1/2 inch", harvest: "40-50 days", water: "Standard soak.", feed: "Light Fish Emulsion", pruning: "Cut-and-come again.", notes: "Shade with tomatoes.", waterDays: 2, feedDays: 14 },
-  "Spinach": { color: "#538d22", method: "DIRECT SOW", quantity: "9 plants", depth: "1/2 inch", harvest: "40-50 days", water: "Standard soak.", feed: "Light Fish Emulsion", pruning: "Cut-and-come again.", notes: "Loves cool spring.", waterDays: 2, feedDays: 14 },
-  "Red Onions": { color: "#cda4f4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", water: "Stop watering late in season.", feed: "Fish Emulsion", pruning: "Keep meticulously weeded.", notes: "Conservative spacing.", waterDays: 3, feedDays: 28 },
-  "Yellow Onions": { color: "#fcefb4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", water: "Stop watering late in season.", feed: "Fish Emulsion", pruning: "Keep meticulously weeded.", notes: "Conservative spacing.", waterDays: 3, feedDays: 28 },
-  "Parsley": { color: "#a7c957", method: "DIRECT SOW", quantity: "2 plants", depth: "1/4 inch", harvest: "60-70 days", water: "Daily mist until sprout.", feed: "Light Fish Emulsion", pruning: "Snip stems from outside in.", notes: "Slow to germinate.", waterDays: 2, feedDays: 21 },
-  "Cilantro": { color: "#a7c957", method: "DIRECT SOW", quantity: "2 plants", depth: "1/4 inch", harvest: "60-70 days", water: "Daily mist until sprout.", feed: "Light Fish Emulsion", pruning: "Snip above leaf node.", notes: "Bolts in heat.", waterDays: 2, feedDays: 21 },
-  "Broccoli": { color: "#4c956c", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", water: "Deep soak 2-3x a week.", feed: "High N Fish Emulsion", pruning: "Leave plant after harvesting main head.", notes: "Watch for loopers.", waterDays: 3, feedDays: 21 },
-  "Dwarf Siberian Kale": { color: "#2c6e49", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", water: "Standard soak.", feed: "High N Fish Emulsion", pruning: "Harvest outermost leaves.", notes: "Frost makes leaves sweeter.", waterDays: 3, feedDays: 21 },
-  "Collard Greens": { color: "#6a994e", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", water: "Standard soak.", feed: "High N Fish Emulsion", pruning: "Harvest outermost leaves.", notes: "Prehistoric-looking bush.", waterDays: 3, feedDays: 21 },
-  "Sugar Snap Peas": { color: "#d9ed92", method: "DIRECT SOW", quantity: "9 seeds", depth: "1 inch", harvest: "60-70 days", water: "Standard soak.", feed: "Light Fish Emulsion", pruning: "Harvest every 1-2 days.", notes: "Nitrogen fixer.", waterDays: 2, feedDays: 21 },
-  "Green Beans": { color: "#b5e48c", method: "DIRECT SOW", quantity: "9 seeds", depth: "1 inch", harvest: "50-60 days", water: "Standard soak.", feed: "Light Fish Emulsion", pruning: "Harvest every 1-2 days.", notes: "Plant outside after frost.", waterDays: 2, feedDays: 21 },
-  "Cucumbers": { color: "#52b788", method: "DIRECT SOW", quantity: "1 plant", depth: "1 inch", harvest: "50-70 days", water: "Heavy drinker.", feed: "Light Fish Emulsion", pruning: "Pick continuously.", notes: "Reduced density saves water.", waterDays: 2, feedDays: 14 },
-  "Roma Tomato": { color: "#e63946", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", water: "Deep soak.", feed: "Fruiting Fertilizer", pruning: "Pinch suckers.", notes: "Wait until late May.", waterDays: 3, feedDays: 14 },
-  "Beefsteak": { color: "#d62828", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "80-90 days", water: "Deep soak.", feed: "Fruiting Fertilizer", pruning: "Aggressive sucker pruning.", notes: "Wait until late May.", waterDays: 3, feedDays: 14 },
-  "Cherry Tomato": { color: "#f25c54", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-75 days", water: "Deep soak.", feed: "Fruiting Fertilizer", pruning: "Pinch early suckers.", notes: "Prolific.", waterDays: 3, feedDays: 14 },
-  "Tomatillo": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", water: "Deep soak.", feed: "Fruiting Fertilizer", pruning: "Heavy support needed.", notes: "Needs 2 to cross-pollinate.", waterDays: 3, feedDays: 21 },
-  "Basil": { color: "#74c69d", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", water: "Standard soak.", feed: "Light Fish Emulsion", pruning: "Pinch to bush out.", notes: "Cold sensitive.", waterDays: 2, feedDays: 21 },
-  "Thai Basil": { color: "#52b788", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", water: "Standard soak.", feed: "Light Fish Emulsion", pruning: "Pinch to bush out.", notes: "Great tomato companion.", waterDays: 2, feedDays: 21 },
-  "Bell Pepper": { color: "#f4a261", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", water: "Standard soak.", feed: "Fruiting Fertilizer", pruning: "Pluck first blossoms.", notes: "Leave on vine to turn red.", waterDays: 3, feedDays: 21 },
-  "Jalapeno": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", water: "Heat stress for max spice.", feed: "Fruiting Fertilizer", pruning: "Pluck first blossoms.", notes: "Turns red if left on vine.", waterDays: 4, feedDays: 21 },
-  "Serrano": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", water: "Heat stress for max spice.", feed: "Fruiting Fertilizer", pruning: "Pluck first blossoms.", notes: "Spicier than Jalapenos.", waterDays: 4, feedDays: 21 },
-  "Thai Hot": { color: "#e63946", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", water: "Heat stress for max spice.", feed: "Fruiting Fertilizer", pruning: "Pluck first blossoms.", notes: "Fiercely hot.", waterDays: 4, feedDays: 21 },
-  "Shishito": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "60-70 days", water: "Standard soak.", feed: "Fruiting Fertilizer", pruning: "Harvest green & wrinkly.", notes: "1 in 10 is spicy.", waterDays: 3, feedDays: 21 },
-  "Marigold": { color: "#fb8500", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50 days", water: "Standard soak.", feed: "None required.", pruning: "Deadhead flowers.", notes: "Nematode defender.", waterDays: 3, feedDays: null },
-  "Nasturtiums": { color: "#ff5400", method: "DIRECT SOW", quantity: "2 plants", depth: "1 inch", harvest: "55-65 days", water: "Standard soak.", feed: "None.", pruning: "Cascade over edge.", notes: "Trap crop for aphids.", waterDays: 3, feedDays: null },
-  "Calendula": { color: "#ffb703", method: "DIRECT SOW", quantity: "1 plant", depth: "1/4 inch", harvest: "50-60 days", water: "Standard soak.", feed: "None required.", pruning: "Deadhead spent blooms.", notes: "Attracts predatory insects.", waterDays: 3, feedDays: null },
-  "SubPod": { color: "#ebd9c8", method: "INFRASTRUCTURE", quantity: "-", depth: "-", harvest: "Continuous", water: "Keep moist.", feed: "Kitchen scraps", pruning: "-", notes: "The nutrient engine.", waterDays: null, feedDays: null },
-  "Open Space": { color: "#e9ecef", method: "-", quantity: "0", depth: "-", harvest: "-", water: "-", feed: "-", pruning: "-", notes: "Reserved area.", waterDays: null, feedDays: null }
+  "Radishes": { color: "#ff8fab", method: "DIRECT SOW", quantity: "16 seeds", depth: "1/2 inch", harvest: "25-30 days", pruning: "Snip weakest sprouts.", notes: "Lightning fast crop.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 1, water: "Daily mist to keep soil soft.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)" }] },
+  "Carrots": { color: "#ffb703", method: "DIRECT SOW", quantity: "9 seeds", depth: "1/4 inch", harvest: "70-80 days", pruning: "Dust with dirt, thin to 9.", notes: "Loose, rock-free soil.", 
+    phases: [
+      { name: "Germination", startDay: 0, waterDays: 1, water: "Needs daily moisture! Use cardboard trick.", feedDays: null, feed: "None required yet." },
+      { name: "Maturation", startDay: 21, waterDays: 3, water: "Deep soak every 3 days.", feedDays: 21, feed: "Light Fish Emulsion (5-1-1)" }
+    ]},
+  "Buttercrunch & Romaine": { color: "#90be6d", method: "DIRECT SOW", quantity: "4 plants", depth: "Surface", harvest: "55-65 days", pruning: "Harvest outer leaves.", notes: "Press seeds firmly.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Keep surface damp.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)" }] },
+  "Arugula": { color: "#73a942", method: "DIRECT SOW", quantity: "9 plants", depth: "1/2 inch", harvest: "40-50 days", pruning: "Cut-and-come again.", notes: "Shade with tomatoes.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)" }] },
+  "Spinach": { color: "#538d22", method: "DIRECT SOW", quantity: "9 plants", depth: "1/2 inch", harvest: "40-50 days", pruning: "Cut-and-come again.", notes: "Loves cool spring.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)" }] },
+  "Red Onions": { color: "#cda4f4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", pruning: "Keep meticulously weeded.", notes: "Conservative spacing.", 
+    phases: [
+      { name: "Bulb Swelling", startDay: 0, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion every 4 weeks." },
+      { name: "Curing", startDay: 80, waterDays: null, water: "CRITICAL: Stop watering entirely when tops flop over.", feedDays: null, feed: "None." }
+    ]},
+  "Yellow Onions": { color: "#fcefb4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", pruning: "Keep meticulously weeded.", notes: "Conservative spacing.", 
+    phases: [
+      { name: "Bulb Swelling", startDay: 0, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion every 4 weeks." },
+      { name: "Curing", startDay: 80, waterDays: null, water: "CRITICAL: Stop watering entirely when tops flop over.", feedDays: null, feed: "None." }
+    ]},
+  "Parsley": { color: "#a7c957", method: "DIRECT SOW", quantity: "2 plants", depth: "1/4 inch", harvest: "60-70 days", pruning: "Snip stems from outside in.", notes: "Slow to germinate.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Daily mist until sprout, then standard.", feedDays: 21, feed: "Light Fish Emulsion" }] },
+  "Cilantro": { color: "#a7c957", method: "DIRECT SOW", quantity: "2 plants", depth: "1/4 inch", harvest: "60-70 days", pruning: "Snip above leaf node.", notes: "Bolts in heat.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Daily mist until sprout, then standard.", feedDays: 21, feed: "Light Fish Emulsion" }] },
+  "Broccoli": { color: "#4c956c", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", pruning: "Leave plant after harvesting main head.", notes: "Watch for loopers.", 
+    phases: [{ name: "Heavy Growth", startDay: 0, waterDays: 3, water: "Deep soak 2-3x a week.", feedDays: 21, feed: "High Nitrogen Fish Emulsion (2 Tbsp/gal)" }] },
+  "Dwarf Siberian Kale": { color: "#2c6e49", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", pruning: "Harvest outermost leaves.", notes: "Frost makes leaves sweeter.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion" }] },
+  "Collard Greens": { color: "#6a994e", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", pruning: "Harvest outermost leaves.", notes: "Prehistoric-looking bush.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion" }] },
+  "Sugar Snap Peas": { color: "#d9ed92", method: "DIRECT SOW", quantity: "9 seeds", depth: "1 inch", harvest: "60-70 days", pruning: "Harvest every 1-2 days.", notes: "Nitrogen fixer.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion" }] },
+  "Green Beans": { color: "#b5e48c", method: "DIRECT SOW", quantity: "9 seeds", depth: "1 inch", harvest: "50-60 days", pruning: "Harvest every 1-2 days.", notes: "Plant outside after frost.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion" }] },
+  "Cucumbers": { color: "#52b788", method: "DIRECT SOW", quantity: "1 plant", depth: "1 inch", harvest: "50-70 days", pruning: "Pick continuously.", notes: "Reduced density saves water.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Heavy drinker. Deep soak.", feedDays: 14, feed: "Light Fish Emulsion" }] },
+  "Roma Tomato": { color: "#e63946", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", pruning: "Pinch suckers. Clear bottom 12 inches.", notes: "Wait until late May.", 
+    phases: [
+      { name: "Vegetative", startDay: 0, waterDays: 3, water: "Deep root soak. Keep leaves dry.", feedDays: 14, feed: "Start with 4-4-4." },
+      { name: "Fruiting/Ripening", startDay: 45, waterDays: 5, water: "Cut water volume by 50% to force ripening.", feedDays: 14, feed: "Switch to Fruiting Fertilizer (2-8-4)." }
+    ]},
+  "Beefsteak": { color: "#d62828", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "80-90 days", pruning: "Aggressive sucker pruning.", notes: "Wait until late May.", 
+    phases: [
+      { name: "Vegetative", startDay: 0, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Start with 4-4-4." },
+      { name: "Fruiting/Ripening", startDay: 50, waterDays: 5, water: "Cut water volume by 50% to force ripening.", feedDays: 14, feed: "Switch to Fruiting Fertilizer (2-8-4)." }
+    ]},
+  "Cherry Tomato": { color: "#f25c54", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-75 days", pruning: "Pinch early suckers.", notes: "Prolific.", 
+    phases: [
+      { name: "Vegetative", startDay: 0, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Start with 4-4-4." },
+      { name: "Fruiting", startDay: 40, waterDays: 4, water: "Consistent deep soak.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
+    ]},
+  "Tomatillo": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", pruning: "Heavy support needed.", notes: "Needs 2 to cross-pollinate.", 
+    phases: [{ name: "Growth & Bloom", startDay: 0, waterDays: 3, water: "Deep soak base, not leaves.", feedDays: 21, feed: "Fruiting Fertilizer (2-8-4)" }] },
+  "Basil": { color: "#74c69d", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", pruning: "Pinch to bush out.", notes: "Cold sensitive.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion" }] },
+  "Thai Basil": { color: "#52b788", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", pruning: "Pinch to bush out.", notes: "Great tomato companion.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion" }] },
+  "Bell Pepper": { color: "#f4a261", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Leave on vine to turn red.", 
+    phases: [
+      { name: "Growth", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4." },
+      { name: "Fruiting", startDay: 40, waterDays: 4, water: "Slight stress before picking.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
+    ]},
+  "Jalapeno": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Turns red if left on vine.", 
+    phases: [
+      { name: "Growth", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4." },
+      { name: "Fruiting (Spice Forcing)", startDay: 40, waterDays: 5, water: "Heat/water stress for max spice.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
+    ]},
+  "Serrano": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Spicier than Jalapenos.", 
+    phases: [
+      { name: "Growth", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4." },
+      { name: "Fruiting (Spice Forcing)", startDay: 40, waterDays: 5, water: "Heat/water stress for max spice.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
+    ]},
+  "Thai Hot": { color: "#e63946", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Fiercely hot.", 
+    phases: [
+      { name: "Growth", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4." },
+      { name: "Fruiting (Spice Forcing)", startDay: 40, waterDays: 5, water: "Heat/water stress for max spice.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
+    ]},
+  "Shishito": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "60-70 days", pruning: "Harvest green & wrinkly.", notes: "1 in 10 is spicy.", 
+    phases: [{ name: "Growth", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "Fruiting Fertilizer (2-8-4)" }] },
+  "Marigold": { color: "#fb8500", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50 days", pruning: "Deadhead flowers.", notes: "Nematode defender.", 
+    phases: [{ name: "Bloom", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None required." }] },
+  "Nasturtiums": { color: "#ff5400", method: "DIRECT SOW", quantity: "2 plants", depth: "1 inch", harvest: "55-65 days", pruning: "Cascade over edge.", notes: "Trap crop for aphids.", 
+    phases: [{ name: "Bloom", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None required." }] },
+  "Calendula": { color: "#ffb703", method: "DIRECT SOW", quantity: "1 plant", depth: "1/4 inch", harvest: "50-60 days", pruning: "Deadhead spent blooms.", notes: "Attracts predatory insects.", 
+    phases: [{ name: "Bloom", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None required." }] },
+  "SubPod": { color: "#ebd9c8", method: "INFRASTRUCTURE", quantity: "-", depth: "-", harvest: "Continuous", pruning: "-", notes: "The nutrient engine.", phases: [{ name: "Active", startDay: 0, waterDays: null, water: "Keep moist.", feedDays: null, feed: "Kitchen scraps" }] },
+  "Open Space": { color: "#e9ecef", method: "-", quantity: "0", depth: "-", harvest: "-", pruning: "-", notes: "Reserved area.", phases: [{ name: "Empty", startDay: 0, waterDays: null, water: "-", feedDays: null, feed: "-" }] }
 };
 
 const getPlantData = (plantName) => {
@@ -61,20 +120,41 @@ const getPlantData = (plantName) => {
 };
 
 // ==========================================
-// ALERT LOGIC ENGINE
+// CHRONOLOGICAL LOGIC ENGINE
 // ==========================================
+const getPlantAge = (plantName, timestamps) => {
+  const planted = timestamps[plantName]?.planted;
+  if (!planted) return null;
+  return Math.floor((new Date() - new Date(planted)) / (1000 * 60 * 60 * 24));
+};
+
+const getCurrentPhase = (plantName, timestamps) => {
+  const info = getPlantData(plantName);
+  if (!info || !info.phases) return null;
+  
+  const age = getPlantAge(plantName, timestamps);
+  if (age === null) return info.phases[0]; // Preview phase 1 if not planted
+  
+  let current = info.phases[0];
+  for (const phase of info.phases) {
+    if (age >= phase.startDay) {
+      current = phase;
+    }
+  }
+  return current;
+};
+
 const checkNeedsAttention = (plantName, timestamps, type) => {
   const info = getPlantData(plantName);
-  if (!info) return false;
+  if (!info || !timestamps[plantName]?.planted) return false; 
   
-  const limit = type === 'water' ? info.waterDays : info.feedDays;
-  if (!limit) return false; // If set to null, ignore it (like SubPod or Open Space)
+  const phase = getCurrentPhase(plantName, timestamps);
+  const limit = type === 'water' ? phase.waterDays : phase.feedDays;
+  if (!limit) return false;
 
   const actionKey = type === 'water' ? 'watered' : 'fed';
-  const lastAction = timestamps[plantName]?.[actionKey];
+  const lastAction = timestamps[plantName]?.[actionKey] || timestamps[plantName]?.planted; 
   
-  if (!lastAction) return true; // Instantly flags if you've never logged a chore for it!
-
   const daysSince = (new Date() - new Date(lastAction)) / (1000 * 60 * 60 * 24);
   return daysSince >= limit;
 };
@@ -92,6 +172,7 @@ const GridRenderer = ({ title, bedId, columns, data, onPlantClick, onBedClick, t
         const info = getPlantData(plant);
         const needsWater = checkNeedsAttention(plant, timestamps, 'water');
         const needsFeed = checkNeedsAttention(plant, timestamps, 'feed');
+        const isPlanted = timestamps[info?.name]?.planted;
 
         return (
           <div 
@@ -99,7 +180,8 @@ const GridRenderer = ({ title, bedId, columns, data, onPlantClick, onBedClick, t
             className="grid-item" 
             style={{ 
               backgroundColor: info ? info.color : '#ced4da',
-              border: needsWater || needsFeed ? '3px solid #d62828' : '2px solid rgba(0,0,0,0.2)' 
+              border: needsWater || needsFeed ? '3px solid #d62828' : '2px solid rgba(0,0,0,0.2)',
+              opacity: isPlanted || plant === "SubPod" || plant === "Open Space" ? 1 : 0.6 
             }}
             onClick={() => onPlantClick(plant)}
           >
@@ -107,6 +189,9 @@ const GridRenderer = ({ title, bedId, columns, data, onPlantClick, onBedClick, t
               <div style={{ fontSize: '18px', marginBottom: '4px' }}>
                 {needsWater && '💧'} {needsFeed && '🧪'}
               </div>
+            )}
+            {!isPlanted && plant !== "SubPod" && plant !== "Open Space" && (
+              <div style={{ fontSize: '14px', marginBottom: '2px' }}>⏳</div>
             )}
             <span>{plant}</span>
             {info && info.quantity !== "0" && info.quantity !== "-" && (
@@ -128,6 +213,7 @@ const GridRenderer = ({ title, bedId, columns, data, onPlantClick, onBedClick, t
 export default function App() {
   const [selectedPlant, setSelectedPlant] = useState(null);
   const [selectedBed, setSelectedBed] = useState(null);
+  const [showFieldGuide, setShowFieldGuide] = useState(false);
   const [timestamps, setTimestamps] = useState({});
 
   useEffect(() => {
@@ -158,10 +244,30 @@ export default function App() {
   const info = selectedPlant ? getPlantData(selectedPlant) : null;
   const bedInfo = selectedBed ? bedDatabase[selectedBed] : null;
 
+  let activePhase = null;
+  let plantAge = null;
+  let isPlanted = false;
+  if (info) {
+    activePhase = getCurrentPhase(info.name, timestamps);
+    plantAge = getPlantAge(info.name, timestamps);
+    isPlanted = !!timestamps[info.name]?.planted;
+  }
+
   return (
     <div className="container">
       <h1>GARDEN PLANNER 2026</h1>
-      <div className="subtitle">Database Sync Active • Tap Blocks to Log Chores</div>
+      <div className="subtitle">
+        Chronological Engine Active • Dim blocks await planting
+        <div style={{ marginTop: '15px' }}>
+          <button 
+            className="btn-action feed" 
+            style={{ width: '100%', padding: '10px', fontSize: '18px', backgroundColor: '#e0b084' }}
+            onClick={() => setShowFieldGuide(true)}
+          >
+            📖 Open Master Field Guide
+          </button>
+        </div>
+      </div>
 
       <GridRenderer bedId="bed1" title="BED 1 • Roots & Greens (6x3x2')" columns={6} data={bed1} onPlantClick={setSelectedPlant} onBedClick={setSelectedBed} timestamps={timestamps} />
       <GridRenderer bedId="bed2" title="BED 2 • Allium & Herb (6x3x2')" columns={6} data={bed2} onPlantClick={setSelectedPlant} onBedClick={setSelectedBed} timestamps={timestamps} />
@@ -181,6 +287,31 @@ export default function App() {
 
       <GridRenderer bedId="bed7" title="BED 7 • Tomato & Basil Haven (6x3x3')" columns={6} data={bed7} onPlantClick={setSelectedPlant} onBedClick={setSelectedBed} timestamps={timestamps} />
 
+      {/* FIELD GUIDE MODAL */}
+      {showFieldGuide && (
+        <div className="modal-overlay" onClick={() => setShowFieldGuide(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              MASTER FIELD GUIDE
+              <button className="close-btn" onClick={() => setShowFieldGuide(false)}>X</button>
+            </div>
+            <div className="modal-body" style={{ textAlign: 'left' }}>
+              
+              <div className="info-box-title" style={{ color: '#d62828', borderBottom: '2px dashed #ccc', paddingBottom: '5px' }}>The 3-Step Seed Watering Strategy</div>
+              <p><strong>1. The Pre-Soak:</strong> Before placing a single seed in the ground, the bed must be flooded. Dry soil wicks moisture away from the delicate seed coat. Soak the bed thoroughly the evening before planting.</p>
+              <p><strong>2. The Cardboard Trick:</strong> Seeds like carrots and radishes are incredibly shallow and dry out in hours under direct sun. After direct sowing and misting the surface, lay a piece of plain brown cardboard directly over the dirt. This traps 100% of the moisture. Lift it daily to check for sprouts.</p>
+              <p><strong>3. The Weaning Phase:</strong> Once germinated, remove the cardboard immediately. Transition from daily surface misting to deeper waterings every 2-3 days to force the young roots to dive downward in search of moisture.</p>
+              
+              <div className="info-box-title" style={{ color: '#2b4a24', borderBottom: '2px dashed #ccc', paddingBottom: '5px', marginTop: '30px' }}>Drip Irrigation Master Rules</div>
+              <p><strong>Macro Rule 1 (Deep Root Soaking):</strong> Frequent, shallow watering creates weak, surface-level root systems that panic during a heatwave. The goal of the drip system is to run for longer periods (30-45 minutes depending on emitter flow) but less frequently (every 3-4 days), soaking the soil a full 8-12 inches down.</p>
+              <p><strong>Macro Rule 2 (The Late-Summer Stress):</strong> For fruiting crops like Tomatoes and Peppers, water is your enemy in late August. Once the fruit has set and reached full size, cut your watering volume by 50%. This mild drought stress forces the plant to stop producing leaves and concentrate all its sugars into ripening the fruit, dramatically increasing flavor and spice.</p>
+              <p><strong>Macro Rule 3 (The Allium Halt):</strong> Onions are susceptible to rot. When the green tops of your onions flop over onto the soil (usually mid-summer), their growing cycle is finished. You must stop watering that bed entirely to allow the bulbs to cure in the dry dirt before harvesting.</p>
+
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* PLANT MODAL */}
       {selectedPlant && info && (
         <div className="modal-overlay" onClick={() => setSelectedPlant(null)}>
@@ -191,23 +322,40 @@ export default function App() {
             </div>
             <div className="modal-body">
               
-              <div className="action-buttons">
-                <button className="btn-action water" onClick={() => markAction(info.name, 'watered')}>💦 Watered</button>
-                <button className="btn-action feed" onClick={() => markAction(info.name, 'fed')}>🧪 Fed</button>
-              </div>
+              {!isPlanted && info.method !== "-" && info.method !== "INFRASTRUCTURE" ? (
+                <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                  <p style={{ color: '#d62828', fontWeight: 'bold' }}>This crop is currently unplanted.</p>
+                  <button className="btn-action feed" onClick={() => markAction(info.name, 'planted')}>
+                    🌱 MARK PLANTED (START CLOCK)
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {info.method !== "-" && info.method !== "INFRASTRUCTURE" && (
+                    <div style={{ textAlign: 'center', marginBottom: '15px', fontWeight: 'bold', color: '#2b4a24', background: '#d9ed92', padding: '8px', borderRadius: '4px', border: '2px solid #2b4a24' }}>
+                      Current Phase: {activePhase.name} (Day {plantAge})
+                    </div>
+                  )}
+                  
+                  <div className="action-buttons">
+                    <button className="btn-action water" onClick={() => markAction(info.name, 'watered')}>💦 Watered</button>
+                    <button className="btn-action feed" onClick={() => markAction(info.name, 'fed')}>🧪 Fed</button>
+                  </div>
 
-              <div className="status-box">
-                <p>Last Watered: {timestamps[info.name]?.watered ? new Date(timestamps[info.name].watered).toLocaleString([], {month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'}) : 'Never'}</p>
-                <p>Last Fed: {timestamps[info.name]?.fed ? new Date(timestamps[info.name].fed).toLocaleString([], {month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'}) : 'Never'}</p>
-              </div>
+                  <div className="status-box">
+                    <p>Last Watered: {timestamps[info.name]?.watered ? new Date(timestamps[info.name].watered).toLocaleString([], {month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'}) : 'Never'}</p>
+                    <p>Last Fed: {timestamps[info.name]?.fed ? new Date(timestamps[info.name].fed).toLocaleString([], {month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'}) : 'Never'}</p>
+                  </div>
+                </>
+              )}
 
               <div className="data-row"><div className="data-label">Method</div><div className="data-value"><strong>{info.method}</strong></div></div>
               <div className="data-row"><div className="data-label">Spacing</div><div className="data-value">{info.quantity} / sq ft</div></div>
               <div className="data-row"><div className="data-label">Seed Depth</div><div className="data-value">{info.depth}</div></div>
               <div className="data-row"><div className="data-label">Timeline</div><div className="data-value">{info.harvest}</div></div>
 
-              <div className="info-box"><div className="info-box-title">💧 Watering</div><div>{info.water}</div></div>
-              <div className="info-box"><div className="info-box-title">🧪 Feeding</div><div>{info.feed}</div></div>
+              <div className="info-box"><div className="info-box-title">💧 Watering</div><div>{activePhase.water}</div></div>
+              <div className="info-box"><div className="info-box-title">🧪 Feeding</div><div>{activePhase.feed}</div></div>
               <div className="info-box"><div className="info-box-title">✂️ Care</div><div>{info.pruning}</div></div>
               <div className="info-box" style={{ background: 'rgba(214, 40, 40, 0.1)', borderColor: '#d62828' }}>
                 <div className="info-box-title" style={{color: '#d62828'}}>💡 Pro-Tip</div><div>{info.notes}</div>
