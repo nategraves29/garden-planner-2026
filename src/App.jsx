@@ -350,25 +350,29 @@ export default function App() {
 
       {/* WEATHER DASHBOARD */}
       {weather && weather.current?.main && (
-        <div style={{ background: 'rgba(0,0,0,0.2)', padding: '15px', borderRadius: '12px', marginBottom: '20px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', border: '2px solid rgba(255,255,255,0.1)' }}>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '12px', opacity: 0.8, textTransform: 'uppercase' }}>Current</div>
-            <div style={{ fontSize: '28px', fontWeight: 'bold' }}>
+        <div className="weather-board">
+          <div className="weather-stat">
+            <div className="weather-label">Current</div>
+            <div className="weather-temp">
               {Math.round(weather.current.main.temp)}° {getWeatherEmoji(weather.current.weather[0].icon)}
             </div>
-            <div style={{ fontSize: '12px', textTransform: 'capitalize' }}>{weather.current.weather[0].description}</div>
+            <div className="weather-desc">{weather.current.weather[0].description}</div>
           </div>
-          <div style={{ width: '1px', height: '40px', background: 'rgba(255,255,255,0.2)' }}></div>
-          <div style={{ textAlign: 'center' }}>
-             <div style={{ fontSize: '12px', opacity: 0.8, textTransform: 'uppercase' }}>Next 3 Hrs</div>
-             <div style={{ fontSize: '20px', marginTop: '4px' }}>
+          
+          <div className="weather-divider"></div>
+          
+          <div className="weather-stat">
+             <div className="weather-label">Next 3 Hrs</div>
+             <div className="weather-temp">
                 {Math.round(weather.forecast.list[1].main.temp)}° {getWeatherEmoji(weather.forecast.list[1].weather[0].icon)}
              </div>
           </div>
-          <div style={{ width: '1px', height: '40px', background: 'rgba(255,255,255,0.2)' }}></div>
-          <div style={{ textAlign: 'center' }}>
-             <div style={{ fontSize: '12px', opacity: 0.8, textTransform: 'uppercase' }}>Tomorrow</div>
-             <div style={{ fontSize: '20px', marginTop: '4px' }}>
+          
+          <div className="weather-divider"></div>
+          
+          <div className="weather-stat">
+             <div className="weather-label">Tomorrow</div>
+             <div className="weather-temp">
                 {Math.round(weather.forecast.list[8].main.temp)}° {getWeatherEmoji(weather.forecast.list[8].weather[0].icon)}
              </div>
           </div>

@@ -1,90 +1,108 @@
 /* ==========================================
-   STARDEW VALLEY UI OVERHAUL
+   TRUE STARDEW VALLEY UI OVERHAUL
    ========================================== */
 
-/* 1. IMPORT PIXEL FONT */
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+/* 1. GLOBAL RESET & BASE AESTHETIC */
 body {
   margin: 0;
   padding: 20px 10px;
-  background-color: #5ea740; /* Stardew Grass Green */
-  background-image: radial-gradient(#529636 15%, transparent 16%), radial-gradient(#529636 15%, transparent 16%);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-  font-family: 'VT323', monospace; /* The core pixel font */
-  color: #3b2818; /* Dark wood brown text instead of black */
-  -webkit-font-smoothing: none; /* Keeps the pixels crisp */
+  /* Classic Stardew Spring Grass Pattern using gradients */
+  background-color: #3f9029; 
+  background-image: 
+    linear-gradient(45deg, #449a2c 25%, transparent 25%, transparent 75%, #449a2c 75%, #449a2c),
+    linear-gradient(45deg, #449a2c 25%, transparent 25%, transparent 75%, #449a2c 75%, #449a2c);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+  font-family: 'VT323', monospace;
+  color: #36141a; /* Stardew dark purple/brown text */
+  -webkit-font-smoothing: none; 
+  image-rendering: pixelated; /* Forces hard edges */
 }
 
 /* 2. THE MASTER INVENTORY MENU */
 .container {
   max-width: 800px;
   margin: 0 auto;
-  background-color: #fce7b1; /* Stardew Menu Parchment */
-  border: 6px solid #8c5b35; /* Inner wood frame */
-  outline: 6px solid #4a2e15; /* Outer dark wood outline */
-  box-shadow: inset 0 0 0 4px #e5b26b, 8px 8px 0px rgba(0,0,0,0.4);
-  border-radius: 4px;
-  padding: 20px;
+  background-color: #f5cc85; /* Stardew Menu Parchment */
+  /* The Ultimate Pixel Border Hack */
+  border: 4px solid #823c11; /* Inner wood frame */
+  outline: 4px solid #36141a; /* Outer dark outline */
+  box-shadow: 
+    inset 4px 4px 0px #ffe5a9,  /* Top/Left Highlight */
+    inset -4px -4px 0px #d4a055, /* Bottom/Right Shadow */
+    12px 12px 0px rgba(0,0,0,0.3); /* Hard pixel drop shadow */
+  padding: 24px;
   box-sizing: border-box;
 }
 
 h1 {
   text-align: center;
-  color: #fff;
-  text-shadow: 3px 3px 0px #4a2e15, -2px -2px 0px #8c5b35;
-  font-size: 48px;
+  color: #f7de4d; /* Golden text */
+  text-shadow: 
+    -2px -2px 0 #823c11,  
+     2px -2px 0 #823c11,
+    -2px  2px 0 #823c11,
+     2px  2px 0 #823c11, /* Heavy stroke */
+     4px  4px 0 #36141a;  /* Drop shadow */
+  font-size: 56px;
   margin-top: 0;
   margin-bottom: 5px;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
 }
 
 .subtitle {
   text-align: center;
-  font-size: 22px;
-  color: #4a2e15;
-  margin-bottom: 25px;
-  font-weight: bold;
+  font-size: 24px;
+  color: #823c11;
+  margin-bottom: 30px;
 }
 
 /* 3. WOODEN SIGNBOARDS (BED HEADERS) */
 .bed-header {
-  background-color: #d18f4a;
-  color: #fff;
-  padding: 10px 15px;
-  font-size: 26px;
-  font-weight: normal;
-  text-shadow: 2px 2px 0px #4a2e15;
-  border: 4px solid #8c5b35;
-  outline: 4px solid #4a2e15;
-  box-shadow: inset 0px 4px 0px rgba(255,255,255,0.2), inset 0px -4px 0px rgba(0,0,0,0.2);
-  margin-bottom: 12px;
+  background-color: #d17c38;
+  color: #ffe5a9;
+  padding: 8px 16px;
+  font-size: 28px;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #36141a;
+  border: 4px solid #823c11;
+  outline: 4px solid #36141a;
+  box-shadow: 
+    inset 4px 4px 0px #e8a25d, 
+    inset -4px -4px 0px #a1501b;
+  margin-bottom: 16px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: transform 0.1s;
+  /* NO SMOOTH TRANSITIONS - Instant clicky feel */
 }
 
 .bed-header:active {
-  transform: translateY(4px);
+  transform: translate(4px, 4px); /* Instant physical press */
+  box-shadow: 
+    inset 4px 4px 0px #a1501b, 
+    inset -4px -4px 0px #e8a25d; /* Reverses the highlight to simulate indent */
 }
 
 .bed-header-icon {
   font-size: 18px;
-  background: rgba(0,0,0,0.2);
-  padding: 4px 8px;
-  border-radius: 4px;
+  color: #fff;
+  text-shadow: none;
 }
 
-/* 4. THE DIRT PATCHES (GRIDS) */
+/* 4. HOED DIRT PATCHES (GRIDS) */
 .bed-section {
-  background-color: #7a5030; /* Dark rich dirt */
-  padding: 15px;
-  border: 4px solid #4a2e15;
-  margin-bottom: 25px;
-  box-shadow: inset 4px 4px 0px rgba(0,0,0,0.3);
+  background-color: #8a4729; /* Fresh hoed dirt */
+  padding: 16px;
+  border: 4px solid #4a2110;
+  margin-bottom: 32px;
+  box-shadow: 
+    inset 4px 4px 0px rgba(0,0,0,0.4), /* Deep shadow makes it look dug out */
+    inset -4px -4px 0px rgba(255,255,255,0.1);
 }
 
 .grid-6, .grid-3 {
@@ -96,8 +114,8 @@ h1 {
 
 .flex-row {
   display: flex;
-  gap: 15px;
-  margin-bottom: 25px;
+  gap: 20px;
+  margin-bottom: 32px;
 }
 .flex-col {
   flex: 1;
@@ -111,41 +129,47 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 18px;
-  padding: 5px;
+  font-size: 20px;
+  padding: 4px;
   cursor: pointer;
-  font-weight: bold;
-  box-shadow: inset -2px -2px 0px rgba(0,0,0,0.3), inset 2px 2px 0px rgba(255,255,255,0.4), 4px 4px 0px rgba(0,0,0,0.2);
+  border: 4px solid #36141a; /* Hard pixel outline */
+  box-shadow: 
+    inset 4px 4px 0px rgba(255,255,255,0.4), 
+    inset -4px -4px 0px rgba(0,0,0,0.3);
   position: relative;
-  transition: transform 0.1s;
+  /* NO TRANSITION */
 }
 
 .grid-item:active {
-  transform: scale(0.95);
+  transform: translate(4px, 4px);
+  box-shadow: 
+    inset 4px 4px 0px rgba(0,0,0,0.4), 
+    inset -4px -4px 0px rgba(255,255,255,0.2);
 }
 
 .qty-badge {
   position: absolute;
   top: 4px;
   right: 4px;
-  background: #4a2e15;
-  color: #fff;
-  font-size: 14px;
-  padding: 2px 4px;
+  background: #36141a;
+  color: #f5cc85;
+  font-size: 16px;
+  padding: 2px 6px;
   line-height: 1;
+  border: 2px solid #f5cc85;
 }
 
 .method-badge {
   font-size: 14px;
-  opacity: 0.8;
+  color: #36141a;
   margin-top: 4px;
 }
 
-/* 6. STARDEW DIALOGUE MODALS */
+/* 6. NPC DIALOGUE MODALS */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7); /* Darker overlay */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,118 +178,171 @@ h1 {
 }
 
 .modal-content {
-  background: #fce7b1;
+  background: #f5cc85; /* Parchment */
   width: 95%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  border: 6px solid #8c5b35;
-  outline: 6px solid #4a2e15;
-  box-shadow: inset 0 0 0 4px #e5b26b, 10px 10px 0px rgba(0,0,0,0.5);
-  padding: 20px;
+  border: 4px solid #823c11;
+  outline: 4px solid #36141a;
+  box-shadow: 
+    inset 4px 4px 0px #ffe5a9,  
+    inset -4px -4px 0px #d4a055, 
+    16px 16px 0px rgba(0,0,0,0.6); /* Massive drop shadow */
+  padding: 24px;
   box-sizing: border-box;
 }
 
 .modal-header {
-  font-size: 32px;
-  font-weight: bold;
-  color: #4a2e15;
-  border-bottom: 4px solid #8c5b35;
+  font-size: 36px;
+  color: #823c11;
+  border-bottom: 4px solid #823c11;
   padding-bottom: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0px 4px 0px #d4a055;
 }
 
 /* 7. CHUNKY INTERACTION BUTTONS */
 .close-btn {
   background: #d62828;
-  color: white;
-  border: 4px solid #780000;
+  color: #fff;
+  border: 4px solid #36141a;
   font-family: 'VT323', monospace;
   font-size: 24px;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
-  box-shadow: inset -2px -2px 0px rgba(0,0,0,0.3), inset 2px 2px 0px rgba(255,255,255,0.4);
+  width: 44px;
+  height: 44px;
+  box-shadow: inset 4px 4px 0px rgba(255,255,255,0.4), inset -4px -4px 0px rgba(0,0,0,0.4);
 }
 
 .close-btn:active {
-  background: #780000;
-  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.5);
+  transform: translate(4px, 4px);
+  box-shadow: inset 4px 4px 0px rgba(0,0,0,0.6);
 }
 
 .action-buttons {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .btn-action {
   flex: 1;
-  padding: 10px;
-  font-size: 22px;
+  padding: 12px;
+  font-size: 24px;
   font-family: 'VT323', monospace;
-  font-weight: bold;
   color: white;
-  text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
-  border: 4px solid #4a2e15;
-  box-shadow: inset -2px -2px 0px rgba(0,0,0,0.3), inset 2px 2px 0px rgba(255,255,255,0.4), 4px 4px 0px rgba(0,0,0,0.3);
+  text-shadow: 2px 2px 0px #36141a;
+  border: 4px solid #36141a;
+  box-shadow: 
+    inset 4px 4px 0px rgba(255,255,255,0.4), 
+    inset -4px -4px 0px rgba(0,0,0,0.4), 
+    4px 4px 0px rgba(0,0,0,0.3);
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
 }
 
 .btn-action:active {
-  transform: translateY(4px) translateX(4px);
-  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.5), 0px 0px 0px rgba(0,0,0,0);
+  transform: translate(4px, 4px);
+  box-shadow: 
+    inset 4px 4px 0px rgba(0,0,0,0.5), 
+    0px 0px 0px rgba(0,0,0,0);
 }
 
-.water { background-color: #219ebc; }
-.feed { background-color: #8cb369; }
+/* Specific button colors mapped to Stardew items */
+.water { background-color: #278cc0; } /* Watering can blue */
+.feed { background-color: #659c36; } /* Fertilizer green */
 
 /* 8. DATA ROWS & INFO BOXES */
 .status-box {
-  background: #e5b26b;
-  border: 4px solid #8c5b35;
-  padding: 10px;
+  background: #d4a055; /* Darker parchment */
+  border: 4px solid #823c11;
+  padding: 12px;
   text-align: center;
-  font-weight: bold;
-  font-size: 20px;
-  margin-bottom: 20px;
-  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.1);
+  font-size: 22px;
+  margin-bottom: 24px;
+  box-shadow: inset 4px 4px 0px rgba(0,0,0,0.1);
+  color: #36141a;
 }
 
-.status-box p { margin: 5px 0; }
+.status-box p { margin: 6px 0; }
 
 .data-row {
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px dashed #8c5b35;
-  padding: 8px 0;
-  font-size: 22px;
+  border-bottom: 4px dotted #d4a055;
+  padding: 10px 0;
+  font-size: 24px;
 }
 
 .info-box {
-  background: #fff;
-  border: 4px solid #8c5b35;
-  padding: 12px;
-  margin-top: 15px;
-  font-size: 20px;
-  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.05);
+  background: #ffe5a9; /* Very light parchment for reading */
+  border: 4px solid #823c11;
+  padding: 16px;
+  margin-top: 16px;
+  font-size: 22px;
+  line-height: 1.2;
 }
 
 .info-box-title {
-  font-weight: bold;
-  font-size: 24px;
-  margin-bottom: 5px;
-  color: #2b4a24;
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: #823c11;
 }
 
 /* RESPONSIVENESS FOR PHONES */
 @media (max-width: 600px) {
   .flex-row { flex-direction: column; }
-  h1 { font-size: 36px; }
+  h1 { font-size: 44px; }
   .grid-item { font-size: 16px; }
-  .btn-action { font-size: 18px; }
+  .btn-action { font-size: 20px; }
+}
+
+/* 9. WEATHER DASHBOARD HUD */
+.weather-board {
+  background-color: #823c11; /* Dark wood base */
+  border: 4px solid #4a2110;
+  outline: 4px solid #36141a;
+  box-shadow: 
+    inset 4px 4px 0px #a1501b, /* Highlight */
+    inset -4px -4px 0px #36141a, /* Shadow */
+    8px 8px 0px rgba(0,0,0,0.3); /* Drop shadow */
+  padding: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #ffe5a9; /* Light parchment text */
+  text-shadow: 2px 2px 0px #36141a;
+}
+
+.weather-divider {
+  width: 4px;
+  height: 48px;
+  background-color: #36141a;
+  box-shadow: 2px 0px 0px #a1501b; /* Carved wood effect */
+}
+
+.weather-stat {
+  text-align: center;
+}
+
+.weather-label {
+  font-size: 18px;
+  color: #e8a25d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.weather-temp {
+  font-size: 32px;
+  margin-top: 4px;
+  font-weight: bold;
+}
+
+.weather-desc {
+  font-size: 18px;
+  text-transform: capitalize;
 }
