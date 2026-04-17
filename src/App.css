@@ -74,37 +74,6 @@ h1 {
   line-height: 1.2;
 }
 
-/* 9. WEATHER DASHBOARD HUD */
-.weather-board {
-  background-color: #823c11;
-  border: 3px solid #4a2110;
-  outline: 3px solid #36141a;
-  box-shadow: 
-    inset 3px 3px 0px #a1501b, 
-    inset -3px -3px 0px #36141a, 
-    4px 4px 0px rgba(0,0,0,0.3); 
-  padding: 10px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;
-  color: #ffe5a9; 
-  text-shadow: 2px 2px 0px #36141a;
-  gap: 5px;
-}
-
-.weather-divider {
-  width: 2px;
-  height: 40px;
-  background-color: #36141a;
-  box-shadow: 1px 0px 0px #a1501b; 
-}
-
-.weather-stat { text-align: center; flex: 1; }
-.weather-label { font-size: 14px; color: #e8a25d; text-transform: uppercase; letter-spacing: 1px; }
-.weather-temp { font-size: 22px; margin-top: 2px; font-weight: bold; }
-.weather-desc { font-size: 14px; text-transform: capitalize; }
-
 /* 3. WOODEN SIGNBOARDS */
 .bed-header {
   background-color: #d17c38;
@@ -347,4 +316,78 @@ h1 {
 @media (max-width: 400px) {
   .weather-temp { font-size: 18px; }
   .btn-action { font-size: 16px; padding: 6px; }
+}
+
+/* 9. WEATHER DASHBOARD HUD */
+.weather-board {
+  background-color: #823c11;
+  border: 3px solid #4a2110;
+  outline: 3px solid #36141a;
+  box-shadow: 
+    inset 3px 3px 0px #a1501b, 
+    inset -3px -3px 0px #36141a, 
+    4px 4px 0px rgba(0,0,0,0.3); 
+  padding: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  color: #ffe5a9; 
+  text-shadow: 2px 2px 0px #36141a;
+  gap: 5px;
+}
+
+.weather-divider {
+  width: 2px;
+  height: 40px;
+  background-color: #36141a;
+  box-shadow: 1px 0px 0px #a1501b; 
+}
+
+.weather-stat { text-align: center; flex: 1; }
+.weather-label { font-size: 14px; color: #e8a25d; text-transform: uppercase; letter-spacing: 1px; }
+.weather-temp { font-size: 22px; margin-top: 2px; font-weight: bold; }
+.weather-desc { font-size: 14px; text-transform: capitalize; }
+
+/* 10. STARDEW TIME HUD */
+.stardew-hud {
+  background-color: #f5cc85;
+  border: 4px solid #823c11;
+  outline: 4px solid #36141a;
+  box-shadow: inset 4px 4px 0px #ffe5a9, inset -4px -4px 0px #d4a055, 6px 6px 0px rgba(0,0,0,0.3);
+  padding: 10px 20px;
+  margin: 0 auto 20px auto;
+  width: fit-content;
+  text-align: center;
+  color: #823c11;
+  font-weight: bold;
+}
+
+.sd-season {
+  font-size: 26px;
+  border-bottom: 3px solid #d4a055;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.sd-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 32px;
+  color: #36141a;
+  line-height: 1;
+}
+
+.sd-icon {
+  font-size: 24px;
+}
+
+/* Mobile Tweak for the HUD */
+@media (max-width: 400px) {
+  .sd-season { font-size: 20px; }
+  .sd-time-row { font-size: 24px; }
+  .sd-icon { font-size: 18px; }
 }

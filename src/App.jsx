@@ -217,6 +217,56 @@ const checkNeedsAttention = (plantName, timestamps, type) => {
 };
 
 // ==========================================
+// STARDEW DATE & TIME MATH
+// ==========================================
+const getStardewDate = () => {
+  const now = new Date();
+  const month = now.getMonth(); 
+  let season = "Spring";
+  let daysPassed = 0;
+
+  if (month >= 2 && month <= 4) { // Mar, Apr, May
+    season = "Spring";
+    const start = new Date(now.getFullYear(), 2, 1);
+    daysPassed = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  } else if (month >= 5 && month <= 7) { // Jun, Jul, Aug
+    season = "Summer";
+    const start = new Date(now.getFullYear(), 5, 1);
+    daysPassed = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  } else if (month >= 8 && month <= 10) { // Sep, Oct, Nov
+    season = "Fall";
+    const start = new Date(now.getFullYear(), 8, 1);
+    daysPassed = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  } else { // Dec, Jan, Feb
+    season = "Winter";
+    let startYear = month === 11 ? now.getFullYear() : now.getFullYear() - 1;
+    const start = new Date(startYear, 11, 1);
+    daysPassed = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  }
+
+  // Squeeze 90-92 real days down to exactly 28 Stardew Days
+  let stardewDay = Math.floor((daysPassed / 92) * 28) + 1;
+  if (stardewDay > 28) stardewDay = 28;
+  if (stardewDay < 1) stardewDay = 1;
+
+  return { season, stardewDay };
+};
+
+const getStardewTime = () => {
+   const now = new Date();
+   let hours = now.getHours();
+   const minutes = now.getMinutes();
+   const ampm = hours >= 12 ? 'pm' : 'am';
+   const icon = (hours >= 6 && hours < 18) ? '☀️' : '🌙';
+   
+   hours = hours % 12;
+   hours = hours ? hours : 12; 
+   const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+   
+   return { time: `${hours}:${minutesStr} ${ampm}`, icon };
+};
+
+// ==========================================
 // WEATHER HELPER
 // ==========================================
 const getWeatherEmoji = (iconCode) => {
@@ -288,8 +338,17 @@ export default function App() {
   const [timestamps, setTimestamps] = useState({});
   const [timestampsLoaded, setTimestampsLoaded] = useState(false);
   const [weather, setWeather] = useState(null);
+  const [timeData, setTimeData] = useState({ sdDate: getStardewDate(), sdTime: getStardewTime() });
 
-  // 1. Load Firebase Data
+  // 1. Start the Live Stardew Clock
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeData({ sdDate: getStardewDate(), sdTime: getStardewTime() });
+    }, 60000); // Ticks every minute
+    return () => clearInterval(timer);
+  }, []);
+
+  // 2. Load Firebase Data
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "gardenData", "chores"), (docSnap) => {
       if (docSnap.exists()) {
@@ -300,7 +359,7 @@ export default function App() {
     return () => unsub();
   }, []);
 
-  // 2. Load Weather & Execute Nature Watering
+  // 3. Load Weather & Execute Nature Watering
   useEffect(() => {
     if (!timestampsLoaded) return;
 
@@ -394,8 +453,14 @@ export default function App() {
   return (
     <div className="container">
       <h1>GARDEN PLANNER 2026</h1>
-      <div className="subtitle">
-        Chronological Engine Active • Dim blocks await planting
+      
+      {/* STARDEW DATE & TIME HUD */}
+      <div className="stardew-hud">
+        <div className="sd-season">{timeData.sdDate.season}. {timeData.sdDate.stardewDay}</div>
+        <div className="sd-time-row">
+          <span className="sd-icon">{timeData.sdTime.icon}</span>
+          <span className="sd-time">{timeData.sdTime.time}</span>
+        </div>
       </div>
 
       {/* WEATHER DASHBOARD */}
@@ -453,7 +518,7 @@ export default function App() {
 
       <GridRenderer bedId="bed7" title="BED 7 • Tomato & Basil Haven (6x3x3')" columns={6} data={bed7} onPlantClick={setSelectedPlant} onBedClick={setSelectedBed} timestamps={timestamps} />
 
-      {/* FIELD GUIDE MODAL (Static Global Rules) */}
+      {/* FIELD GUIDE MODAL */}
       {showFieldGuide && (
         <div className="modal-overlay" onClick={() => setShowFieldGuide(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
