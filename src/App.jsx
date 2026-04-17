@@ -20,93 +20,93 @@ const bedDatabase = {
 // DYNAMIC CHRONOLOGICAL PLANT DATABASE
 // ==========================================
 const plantDatabase = {
-  "Radishes": { color: "#ff8fab", method: "DIRECT SOW", quantity: "16 seeds", depth: "1/2 inch", harvest: "25-30 days", pruning: "Snip weakest sprouts.", notes: "Lightning fast crop.", 
+  "Radishes": { color: "#ff8fab", method: "DIRECT SOW (Precision Poke)", quantity: "16 seeds", depth: "1/2 inch", harvest: "25-30 days", pruning: "Snip weakest sprouts.", notes: "Pro-Tip: Lightning fast. Harvest promptly to free up root space.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 1, water: "Daily mist to keep soil soft.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)" }] },
-  "Carrots": { color: "#ffb703", method: "DIRECT SOW", quantity: "9 seeds", depth: "1/4 inch", harvest: "70-80 days", pruning: "Dust with dirt, thin to 9.", notes: "Loose, rock-free soil.", 
+  "Carrots": { color: "#ffb703", method: "DIRECT SOW (Scatter & Thin)", quantity: "Thin to 9", depth: "1/4 inch", harvest: "70-80 days", pruning: "Dust with dirt, thin at 2 inches tall.", notes: "Sowing Secret: Seeds are tiny. Scatter lightly, then thin down to a conservative 9 per sq ft to preserve soil nutrients.", 
     phases: [
       { name: "Germination", startDay: 0, waterDays: 1, water: "Needs daily moisture! Use cardboard trick.", feedDays: null, feed: "None required yet." },
       { name: "Maturation", startDay: 21, waterDays: 3, water: "Deep soak every 3 days.", feedDays: 21, feed: "Light Fish Emulsion (5-1-1)" }
     ]},
-  "Buttercrunch & Romaine": { color: "#90be6d", method: "DIRECT SOW", quantity: "4 plants", depth: "Surface", harvest: "55-65 days", pruning: "Harvest outer leaves.", notes: "Press seeds firmly.", 
+  "Buttercrunch & Romaine": { color: "#90be6d", method: "DIRECT SOW (Precision Poke)", quantity: "4 seeds", depth: "Surface", harvest: "55-65 days", pruning: "Harvest outer leaves.", notes: "Sowing Secret: Lettuce needs light to germinate. Press seeds firmly into dirt, do not bury.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Keep surface damp.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)" }] },
-  "Arugula": { color: "#73a942", method: "DIRECT SOW", quantity: "9 plants", depth: "1/2 inch", harvest: "40-50 days", pruning: "Cut-and-come again.", notes: "Shade with tomatoes.", 
+  "Arugula": { color: "#73a942", method: "DIRECT SOW (Scatter & Thin)", quantity: "Thin to 9", depth: "1/2 inch", harvest: "40-50 days", pruning: "Cut-and-come again.", notes: "Continuous Harvest Secret: Never pull the roots. Just cut the leaves and it will regrow.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)" }] },
-  "Spinach": { color: "#538d22", method: "DIRECT SOW", quantity: "9 plants", depth: "1/2 inch", harvest: "40-50 days", pruning: "Cut-and-come again.", notes: "Loves cool spring.", 
+  "Spinach": { color: "#538d22", method: "DIRECT SOW (Precision Poke)", quantity: "9 seeds", depth: "1/2 inch", harvest: "40-50 days", pruning: "Cut-and-come again.", notes: "Pro-Tip: Loves cool spring. Shade with taller crops later in the season.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)" }] },
-  "Red Onions": { color: "#cda4f4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", pruning: "Keep meticulously weeded.", notes: "Conservative spacing.", 
+  "Red Onions": { color: "#cda4f4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", pruning: "Keep meticulously weeded.", notes: "Growing Secret: Onions hate competition. Hand-pull all weeds immediately.", 
     phases: [
       { name: "Bulb Swelling", startDay: 0, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion every 4 weeks." },
       { name: "Curing", startDay: 80, waterDays: null, water: "CRITICAL: Stop watering entirely when tops flop over.", feedDays: null, feed: "None." }
     ]},
-  "Yellow Onions": { color: "#fcefb4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", pruning: "Keep meticulously weeded.", notes: "Conservative spacing.", 
+  "Yellow Onions": { color: "#fcefb4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", pruning: "Keep meticulously weeded.", notes: "Growing Secret: Onions hate competition. Hand-pull all weeds immediately.", 
     phases: [
       { name: "Bulb Swelling", startDay: 0, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion every 4 weeks." },
       { name: "Curing", startDay: 80, waterDays: null, water: "CRITICAL: Stop watering entirely when tops flop over.", feedDays: null, feed: "None." }
     ]},
-  "Parsley": { color: "#a7c957", method: "DIRECT SOW", quantity: "2 plants", depth: "1/4 inch", harvest: "60-70 days", pruning: "Snip stems from outside in.", notes: "Slow to germinate.", 
+  "Parsley": { color: "#a7c957", method: "DIRECT SOW (Precision Poke)", quantity: "2 seeds", depth: "1/4 inch", harvest: "60-70 days", pruning: "Snip stems from outside in.", notes: "Sowing Secret: Extremely slow to germinate. Don't give up on it.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Daily mist until sprout, then standard.", feedDays: 21, feed: "Light Fish Emulsion" }] },
-  "Cilantro": { color: "#a7c957", method: "DIRECT SOW", quantity: "2 plants", depth: "1/4 inch", harvest: "60-70 days", pruning: "Snip above leaf node.", notes: "Bolts in heat.", 
+  "Cilantro": { color: "#a7c957", method: "DIRECT SOW (Precision Poke)", quantity: "2 seeds", depth: "1/4 inch", harvest: "60-70 days", pruning: "Snip above leaf node.", notes: "Growing Secret: Bolts instantly in high heat. Harvest aggressively.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Daily mist until sprout, then standard.", feedDays: 21, feed: "Light Fish Emulsion" }] },
-  "Broccoli": { color: "#4c956c", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", pruning: "Leave plant after harvesting main head.", notes: "Watch for loopers.", 
+  "Broccoli": { color: "#4c956c", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", pruning: "Leave plant after harvesting main head.", notes: "Fruiting Secret: After cutting the main head, it will push out smaller side-shoots for weeks.", 
     phases: [{ name: "Heavy Growth", startDay: 0, waterDays: 3, water: "Deep soak 2-3x a week.", feedDays: 21, feed: "High Nitrogen Fish Emulsion (2 Tbsp/gal)" }] },
-  "Dwarf Siberian Kale": { color: "#2c6e49", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", pruning: "Harvest outermost leaves.", notes: "Frost makes leaves sweeter.", 
+  "Dwarf Siberian Kale": { color: "#2c6e49", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", pruning: "Harvest outermost leaves.", notes: "Growing Secret: A light frost causes the plant to push sugars into the leaves, making them sweeter.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion" }] },
-  "Collard Greens": { color: "#6a994e", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", pruning: "Harvest outermost leaves.", notes: "Prehistoric-looking bush.", 
+  "Collard Greens": { color: "#6a994e", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", pruning: "Harvest outermost leaves.", notes: "Pro-Tip: Stems are tough, strip the leaves off the center rib before cooking.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion" }] },
-  "Sugar Snap Peas": { color: "#d9ed92", method: "DIRECT SOW", quantity: "9 seeds", depth: "1 inch", harvest: "60-70 days", pruning: "Harvest every 1-2 days.", notes: "Nitrogen fixer.", 
+  "Sugar Snap Peas": { color: "#d9ed92", method: "DIRECT SOW (Precision Poke)", quantity: "9 seeds", depth: "1 inch", harvest: "60-70 days", pruning: "Harvest every 1-2 days.", notes: "Fruiting Secret: The more you pick, the more flowers it pushes. Never let a pod get overly fat.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion" }] },
-  "Green Beans": { color: "#b5e48c", method: "DIRECT SOW", quantity: "9 seeds", depth: "1 inch", harvest: "50-60 days", pruning: "Harvest every 1-2 days.", notes: "Plant outside after frost.", 
+  "Green Beans": { color: "#b5e48c", method: "DIRECT SOW (Precision Poke)", quantity: "9 seeds", depth: "1 inch", harvest: "50-60 days", pruning: "Harvest every 1-2 days.", notes: "Fruiting Secret: Beans are nitrogen fixers and pull their own food from the air.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion" }] },
-  "Cucumbers": { color: "#52b788", method: "DIRECT SOW", quantity: "1 plant", depth: "1 inch", harvest: "50-70 days", pruning: "Pick continuously.", notes: "Reduced density saves water.", 
+  "Cucumbers": { color: "#52b788", method: "DIRECT SOW (Precision Poke)", quantity: "2 seeds (thin to 1)", depth: "1 inch", harvest: "50-70 days", pruning: "Pick continuously.", notes: "Growing Secret: Poke 2 seeds per hole, snip the weakest one. Train vines up the trellis immediately.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Heavy drinker. Deep soak.", feedDays: 14, feed: "Light Fish Emulsion" }] },
-  "Roma Tomato": { color: "#e63946", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", pruning: "Pinch suckers. Clear bottom 12 inches.", notes: "Wait until late May.", 
+  "Roma Tomato": { color: "#e63946", method: "TRANSPLANT (Deep Trench)", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", pruning: "Aggressive sucker pruning. Clear bottom 12 inches.", notes: "Transplanting Secret: Strip the bottom leaves and bury the stem horizontally. The buried stem will grow a massive taproot.", 
     phases: [
       { name: "Vegetative", startDay: 0, waterDays: 3, water: "Deep root soak. Keep leaves dry.", feedDays: 14, feed: "Start with 4-4-4." },
-      { name: "Fruiting/Ripening", startDay: 45, waterDays: 5, water: "Cut water volume by 50% to force ripening.", feedDays: 14, feed: "Switch to Fruiting Fertilizer (2-8-4)." }
+      { name: "Fruiting/Ripening", startDay: 45, waterDays: 5, water: "Fruiting Secret: Cut water volume by 50% to force ripening.", feedDays: 14, feed: "Switch to Fruiting Fertilizer (2-8-4)." }
     ]},
-  "Beefsteak": { color: "#d62828", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "80-90 days", pruning: "Aggressive sucker pruning.", notes: "Wait until late May.", 
+  "Beefsteak": { color: "#d62828", method: "TRANSPLANT (Deep Trench)", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "80-90 days", pruning: "Aggressive sucker pruning.", notes: "Transplanting Secret: Strip bottom leaves, bury stem deep to build the root engine.", 
     phases: [
       { name: "Vegetative", startDay: 0, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Start with 4-4-4." },
-      { name: "Fruiting/Ripening", startDay: 50, waterDays: 5, water: "Cut water volume by 50% to force ripening.", feedDays: 14, feed: "Switch to Fruiting Fertilizer (2-8-4)." }
+      { name: "Fruiting/Ripening", startDay: 50, waterDays: 5, water: "Fruiting Secret: Cut water volume by 50% to force ripening.", feedDays: 14, feed: "Switch to Fruiting Fertilizer (2-8-4)." }
     ]},
-  "Cherry Tomato": { color: "#f25c54", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-75 days", pruning: "Pinch early suckers.", notes: "Prolific.", 
+  "Cherry Tomato": { color: "#f25c54", method: "TRANSPLANT (Deep Trench)", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-75 days", pruning: "Pinch early suckers only.", notes: "Fruiting Secret: Cherry tomatoes are chaotic. Prune early, then let them vine out wildly over the trellis.", 
     phases: [
       { name: "Vegetative", startDay: 0, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Start with 4-4-4." },
       { name: "Fruiting", startDay: 40, waterDays: 4, water: "Consistent deep soak.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
     ]},
-  "Tomatillo": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", pruning: "Heavy support needed.", notes: "Needs 2 to cross-pollinate.", 
+  "Tomatillo": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", pruning: "Heavy support needed.", notes: "Fruiting Secret: Strictly not self-pollinating. If one plant dies, the other will drop empty husks.", 
     phases: [{ name: "Growth & Bloom", startDay: 0, waterDays: 3, water: "Deep soak base, not leaves.", feedDays: 21, feed: "Fruiting Fertilizer (2-8-4)" }] },
-  "Basil": { color: "#74c69d", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", pruning: "Pinch to bush out.", notes: "Cold sensitive.", 
+  "Basil": { color: "#74c69d", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", pruning: "Pinch to bush out.", notes: "Growing Secret: Never let it flower. Pinch the top clusters off so it bushes outwards.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion" }] },
-  "Thai Basil": { color: "#52b788", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", pruning: "Pinch to bush out.", notes: "Great tomato companion.", 
+  "Thai Basil": { color: "#52b788", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", pruning: "Pinch to bush out.", notes: "Pro-Tip: Great companion for tomatoes, masks the scent from pests.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion" }] },
-  "Bell Pepper": { color: "#f4a261", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Leave on vine to turn red.", 
+  "Bell Pepper": { color: "#f4a261", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Growing Secret: Pluck the very first round of flowers off so the plant builds a stronger frame first.", 
     phases: [
       { name: "Growth", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4." },
       { name: "Fruiting", startDay: 40, waterDays: 4, water: "Slight stress before picking.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
     ]},
-  "Jalapeno": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Turns red if left on vine.", 
+  "Jalapeno": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Fruiting Secret: Look for brown 'corking' lines on the skin—that means it's fully spicy and ready.", 
     phases: [
       { name: "Growth", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4." },
-      { name: "Fruiting (Spice Forcing)", startDay: 40, waterDays: 5, water: "Heat/water stress for max spice.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
+      { name: "Fruiting (Spice Forcing)", startDay: 40, waterDays: 5, water: "Fruiting Secret: Heat & drought stress right before harvest spikes the capsaicin.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
     ]},
-  "Serrano": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Spicier than Jalapenos.", 
+  "Serrano": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Pro-Tip: Smaller and significantly spicier than Jalapenos.", 
     phases: [
       { name: "Growth", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4." },
-      { name: "Fruiting (Spice Forcing)", startDay: 40, waterDays: 5, water: "Heat/water stress for max spice.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
+      { name: "Fruiting (Spice Forcing)", startDay: 40, waterDays: 5, water: "Fruiting Secret: Heat & drought stress right before harvest spikes the capsaicin.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
     ]},
-  "Thai Hot": { color: "#e63946", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Fiercely hot.", 
+  "Thai Hot": { color: "#e63946", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", pruning: "Pluck first blossoms.", notes: "Fruiting Secret: Produces hundreds of tiny peppers facing straight up at the sky.", 
     phases: [
       { name: "Growth", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4." },
-      { name: "Fruiting (Spice Forcing)", startDay: 40, waterDays: 5, water: "Heat/water stress for max spice.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
+      { name: "Fruiting (Spice Forcing)", startDay: 40, waterDays: 5, water: "Fruiting Secret: Heat & drought stress right before harvest spikes the capsaicin.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)." }
     ]},
-  "Shishito": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "60-70 days", pruning: "Harvest green & wrinkly.", notes: "1 in 10 is spicy.", 
+  "Shishito": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "60-70 days", pruning: "Harvest green & wrinkly.", notes: "Growing Secret: 1 in 10 is spicy. Harvest when they are 2-3 inches long and very wrinkled.", 
     phases: [{ name: "Growth", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "Fruiting Fertilizer (2-8-4)" }] },
-  "Marigold": { color: "#fb8500", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50 days", pruning: "Deadhead flowers.", notes: "Nematode defender.", 
+  "Marigold": { color: "#fb8500", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50 days", pruning: "Deadhead flowers.", notes: "Growing Secret: The roots secrete a chemical that actively kills root-knot nematodes in the soil.", 
     phases: [{ name: "Bloom", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None required." }] },
-  "Nasturtiums": { color: "#ff5400", method: "DIRECT SOW", quantity: "2 plants", depth: "1 inch", harvest: "55-65 days", pruning: "Cascade over edge.", notes: "Trap crop for aphids.", 
+  "Nasturtiums": { color: "#ff5400", method: "DIRECT SOW (Precision Poke)", quantity: "2 seeds", depth: "1 inch", harvest: "55-65 days", pruning: "Cascade over edge.", notes: "Growing Secret: A sacrificial trap crop. Aphids will attack this instead of your vegetables.", 
     phases: [{ name: "Bloom", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None required." }] },
-  "Calendula": { color: "#ffb703", method: "DIRECT SOW", quantity: "1 plant", depth: "1/4 inch", harvest: "50-60 days", pruning: "Deadhead spent blooms.", notes: "Attracts predatory insects.", 
+  "Calendula": { color: "#ffb703", method: "DIRECT SOW (Precision Poke)", quantity: "1 seed", depth: "1/4 inch", harvest: "50-60 days", pruning: "Deadhead spent blooms.", notes: "Growing Secret: Attracts predatory insects that hunt garden pests.", 
     phases: [{ name: "Bloom", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None required." }] },
   "SubPod": { color: "#ebd9c8", method: "INFRASTRUCTURE", quantity: "-", depth: "-", harvest: "Continuous", pruning: "-", notes: "The nutrient engine.", phases: [{ name: "Active", startDay: 0, waterDays: null, water: "Keep moist.", feedDays: null, feed: "Kitchen scraps" }] },
   "Open Space": { color: "#e9ecef", method: "-", quantity: "0", depth: "-", harvest: "-", pruning: "-", notes: "Reserved area.", phases: [{ name: "Empty", startDay: 0, waterDays: null, water: "-", feedDays: null, feed: "-" }] }
