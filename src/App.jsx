@@ -17,42 +17,105 @@ const bedDatabase = {
 };
 
 const plantDatabase = {
-  "Radishes": { color: "#ff8fab", method: "DIRECT SOW (Precision Poke)", quantity: "16 seeds", depth: "1/2 inch", harvest: "25-30 days", phases: [{ name: "Sprouting", startDay: 0, waterDays: 1, water: "Daily mist to keep soil soft.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)", pruning: "Snip the weakest sprouts with scissors at the soil line.", tip: "Keep the surface wet so the roots can easily push down into the dirt." }, { name: "Bulbing", startDay: 15, waterDays: 2, water: "Standard soak.", feedDays: null, feed: "None", pruning: "Keep area weed-free.", tip: "Lightning fast. Harvest promptly right around Day 25 to free up root space." }]},
-  "Carrots": { color: "#ffb703", method: "DIRECT SOW (Scatter & Thin)", quantity: "Thin to 9", depth: "1/4 inch", harvest: "70-80 days", phases: [{ name: "Germination", startDay: 0, waterDays: 1, water: "Needs daily moisture! Use cardboard trick.", feedDays: null, feed: "None required yet.", pruning: "Do not touch the soil surface.", tip: "Seeds are tiny and take forever to sprout. Keep the cardboard on until you see green." }, { name: "Maturation", startDay: 21, waterDays: 3, water: "Deep soak every 3 days.", feedDays: 21, feed: "Light Fish Emulsion (5-1-1)", pruning: "Thin down to a conservative 9 per sq ft.", tip: "When weeding, cut weeds at the base rather than pulling, so you don't disturb the carrot taproots." }, { name: "Harvest Window", startDay: 65, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None", pruning: "None.", tip: "A light frost actually forces sugars into the root. Leave them in the ground until you need to eat them." }]},
-  "Buttercrunch & Romaine": { color: "#90be6d", method: "DIRECT SOW (Precision Poke)", quantity: "4 seeds", depth: "Surface", harvest: "55-65 days", phases: [{ name: "Seedling", startDay: 0, waterDays: 2, water: "Keep surface damp.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)", pruning: "Snip weakest sprouts.", tip: "Lettuce needs light to germinate. Press seeds firmly into dirt, do not bury them." }, { name: "Growth", startDay: 25, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Fish Emulsion", pruning: "Harvest outer leaves only.", tip: "Pick the outermost leaves for salads and the center will keep growing." }]},
-  "Arugula": { color: "#73a942", method: "DIRECT SOW (Scatter & Thin)", quantity: "Thin to 9", depth: "1/2 inch", harvest: "40-50 days", phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)", pruning: "Thin to 9 plants.", tip: "Flea beetles love arugula. Keep an eye out for tiny holes in the leaves." }, { name: "Harvest", startDay: 30, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "Cut leaves 1 inch above soil.", tip: "Continuous Harvest Secret: Never pull the roots. Just cut the leaves and it will regrow." }]},
-  "Spinach": { color: "#538d22", method: "DIRECT SOW (Precision Poke)", quantity: "9 seeds", depth: "1/2 inch", harvest: "40-50 days", phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)", pruning: "Keep weed free.", tip: "Loves the cool spring. If the weather gets too hot, it will 'bolt' (go to seed) and turn bitter." }, { name: "Harvest", startDay: 35, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "Cut outermost leaves.", tip: "Shade with taller crops later in the season to extend its life." }]},
-  "Red Onions": { color: "#cda4f4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", phases: [{ name: "Bulb Swelling", startDay: 0, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion every 4 weeks.", pruning: "Hand-pull ALL weeds immediately.", tip: "Growing Secret: Onions have tiny roots and hate competition. The bed must be perfectly weed-free." }, { name: "Curing", startDay: 80, waterDays: null, water: "CRITICAL: Stop watering entirely.", feedDays: null, feed: "None.", pruning: "Do not touch them.", tip: "When the green tops flop over, they are done growing. Let them sit in dry dirt for a week to cure the skins." }]},
-  "Yellow Onions": { color: "#fcefb4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", phases: [{ name: "Bulb Swelling", startDay: 0, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion every 4 weeks.", pruning: "Hand-pull ALL weeds immediately.", tip: "Growing Secret: Onions have tiny roots and hate competition. The bed must be perfectly weed-free." }, { name: "Curing", startDay: 80, waterDays: null, water: "CRITICAL: Stop watering entirely.", feedDays: null, feed: "None.", pruning: "Do not touch them.", tip: "When the green tops flop over, they are done growing. Let them sit in dry dirt for a week to cure the skins." }]},
-  "Parsley": { color: "#a7c957", method: "DIRECT SOW (Precision Poke)", quantity: "2 seeds", depth: "1/4 inch", harvest: "60-70 days", phases: [{ name: "Seedling", startDay: 0, waterDays: 2, water: "Daily mist until sprout.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Snip weakest sprout.", tip: "Extremely slow to germinate. Don't give up on it." }, { name: "Growth", startDay: 30, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Snip stems from outside in.", tip: "Always harvest from the outer edge so the center crown continues pushing new growth." }]},
-  "Cilantro": { color: "#a7c957", method: "DIRECT SOW (Precision Poke)", quantity: "2 seeds", depth: "1/4 inch", harvest: "60-70 days", phases: [{ name: "Seedling", startDay: 0, waterDays: 2, water: "Daily mist until sprout.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Snip weakest sprout.", tip: "Crack the round seed shell gently before planting to speed up germination." }, { name: "Growth", startDay: 25, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Harvest aggressively.", tip: "Bolts instantly in high heat. Cut it often to delay flowering." }]},
-  "Broccoli": { color: "#4c956c", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", phases: [{ name: "Heavy Growth", startDay: 0, waterDays: 3, water: "Deep soak 2-3x a week.", feedDays: 21, feed: "High Nitrogen (2 Tbsp/gal)", pruning: "Check under leaves for eggs.", tip: "Very heavy feeder. Watch out for little white moths—they lay the green cabbage looper caterpillars." }, { name: "Fruiting", startDay: 45, waterDays: 3, water: "Deep soak.", feedDays: 21, feed: "High Nitrogen", pruning: "Cut main head before it flowers.", tip: "Harvest the big head while it's tight. If you see yellow flowers, you waited too long." }, { name: "Side-Shoots", startDay: 60, waterDays: 3, water: "Deep soak.", feedDays: 21, feed: "High Nitrogen", pruning: "Harvest mini-florets.", tip: "After cutting the main head, leave the plant! It will push out smaller side-shoots for weeks." }]},
-  "Dwarf Siberian Kale": { color: "#2c6e49", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", phases: [{ name: "Growth", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion", pruning: "Harvest outermost leaves.", tip: "Twist leaves off downwards to snap them cleanly from the main stalk." }, { name: "Late Season", startDay: 60, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion", pruning: "Keep harvesting.", tip: "A light frost causes the plant to push sugars into the leaves, making them significantly sweeter." }]},
-  "Collard Greens": { color: "#6a994e", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", phases: [{ name: "Growth", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion", pruning: "Harvest outermost leaves.", tip: "Just like kale, harvest from the bottom up. The plant will eventually look like a small palm tree." }]},
-  "Sugar Snap Peas": { color: "#d9ed92", method: "DIRECT SOW (Precision Poke)", quantity: "9 seeds", depth: "1 inch", harvest: "60-70 days", phases: [{ name: "Climbing", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Guide tendrils to trellis.", tip: "Peas hate hot weather. Get them climbing the trellis early so they get good airflow." }, { name: "Fruiting", startDay: 45, waterDays: 2, water: "Standard soak.", feedDays: null, feed: "None (Nitrogen Fixer)", pruning: "Harvest every 1-2 days.", tip: "The more you pick, the more flowers it pushes. Never let a pod get overly fat and bumpy." }]},
-  "Green Beans": { color: "#b5e48c", method: "DIRECT SOW (Precision Poke)", quantity: "9 seeds", depth: "1 inch", harvest: "50-60 days", phases: [{ name: "Climbing", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Guide to trellis.", tip: "Beans are nitrogen fixers. They pull their own food from the air, so don't over-fertilize them." }, { name: "Fruiting", startDay: 40, waterDays: 2, water: "Standard soak.", feedDays: null, feed: "None", pruning: "Harvest every 1-2 days.", tip: "Pick them when they are slender. If you can see the beans bulging inside the pod, they will be tough." }]},
-  "Cucumbers": { color: "#52b788", method: "DIRECT SOW (Precision Poke)", quantity: "2 seeds (thin to 1)", depth: "1 inch", harvest: "50-70 days", phases: [{ name: "Vining", startDay: 0, waterDays: 2, water: "Heavy drinker. Deep soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "Snip weakest seedling.", tip: "Poke 2 seeds per hole, snip the weakest one. Train the surviving vine up the trellis immediately." }, { name: "Fruiting", startDay: 45, waterDays: 2, water: "Heavy deep soak.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)", pruning: "Pick continuously.", tip: "Water is critical now. A thirsty cucumber plant will produce bitter, twisted fruit." }]},
-  "Roma Tomato": { color: "#e63946", method: "TRANSPLANT (Deep Trench)", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", phases: [{ name: "Vegetative", startDay: 0, waterDays: 3, water: "Deep root soak. Keep leaves dry.", feedDays: 14, feed: "Start with 4-4-4.", pruning: "Pinch off early armpit suckers.", tip: "Transplanting Secret: Strip the bottom leaves and bury the stem horizontally. The buried stem will grow a massive taproot." }, { name: "Heavy Growth", startDay: 30, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Switch to 2-8-4.", pruning: "Aggressive pruning. Clear bottom 12 inches.", tip: "Remove all branches touching the ground. Soil splashing onto leaves is how blight starts." }, { name: "Ripening", startDay: 60, waterDays: 5, water: "Cut water volume by 50%.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)", pruning: "Maintain airflow.", tip: "Fruiting Secret: Drought stress forces the plant to panic and dump all its sugars into ripening the fruit. Less water = better flavor." }]},
-  "Beefsteak": { color: "#d62828", method: "TRANSPLANT (Deep Trench)", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "80-90 days", phases: [{ name: "Vegetative", startDay: 0, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Start with 4-4-4.", pruning: "Pinch suckers.", tip: "Bury the stem deep. You are building the root engine right now." }, { name: "Heavy Growth", startDay: 35, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Switch to 2-8-4.", pruning: "Clear bottom 12 inches.", tip: "These are heavy tomatoes. Make sure your trellis or cage is fully secured." }, { name: "Ripening", startDay: 70, waterDays: 5, water: "Cut water volume by 50%.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4)", pruning: "Maintain airflow.", tip: "Drought stress forces ripening. Pick them right as they 'blush' red and let them finish ripening on the kitchen counter to prevent bug damage." }]},
-  "Cherry Tomato": { color: "#f25c54", method: "TRANSPLANT (Deep Trench)", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-75 days", phases: [{ name: "Vegetative", startDay: 0, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Start with 4-4-4.", pruning: "Pinch early suckers only.", tip: "Bury stem deep. Establish the roots." }, { name: "Wild Fruiting", startDay: 40, waterDays: 4, water: "Consistent deep soak.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4).", pruning: "Let it vine out wildly.", tip: "Fruiting Secret: Cherry tomatoes are chaotic. Unlike Romas, you don't need to strictly prune suckers. Let them become a massive bush over the trellis." }]},
-  "Tomatillo": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 massive plant", depth: "Bury stem deep", harvest: "65-85 days", phases: [{ name: "Growth & Bloom", startDay: 0, waterDays: 3, water: "Deep soak base, not leaves.", feedDays: 21, feed: "Fruiting Fertilizer (2-8-4)", pruning: "Cage immediately.", tip: "Strictly not self-pollinating. If one plant dies, the other will drop empty husks. Protect them both." }, { name: "Fruiting", startDay: 50, waterDays: 3, water: "Deep soak.", feedDays: 21, feed: "Fruiting Fertilizer (2-8-4)", pruning: "Support heavy branches.", tip: "Harvest when the green fruit completely fills the papery husk and the husk splits open at the bottom." }]},
-  "Basil": { color: "#74c69d", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Pinch top clusters.", tip: "Never let it flower. Pinch the top leaves off so it bushes outwards into a massive shrub." }]},
-  "Thai Basil": { color: "#52b788", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", phases: [{ name: "Growth", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Pinch top clusters.", tip: "Great companion for tomatoes, the heavy scent masks the smell of the tomatoes from pests." }]},
-  "Bell Pepper": { color: "#f4a261", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", phases: [{ name: "Frame Building", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4.", pruning: "Pluck the very first blossoms.", tip: "Growing Secret: Pluck the first round of flowers off so the plant builds a stronger physical frame first." }, { name: "Fruiting", startDay: 45, waterDays: 4, water: "Slight stress before picking.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4).", pruning: "Provide stake support.", tip: "You can eat them green, but if you leave them on the plant for another 2-3 weeks they will turn red and sweeten dramatically." }]},
-  "Jalapeno": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", phases: [{ name: "Frame Building", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4.", pruning: "Pluck first blossoms.", tip: "Pinch early flowers to build a strong canopy." }, { name: "Spice Forcing", startDay: 45, waterDays: 5, water: "Drought stress before harvest.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4).", pruning: "Snip with shears.", tip: "Fruiting Secret: Heat & drought stress right before harvest spikes the capsaicin. Look for brown 'corking' lines on the skin for max spice." }]},
-  "Serrano": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", phases: [{ name: "Frame Building", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4.", pruning: "Pluck first blossoms.", tip: "Pinch early flowers to build a strong canopy." }, { name: "Spice Forcing", startDay: 45, waterDays: 5, water: "Drought stress before harvest.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4).", pruning: "Snip with shears.", tip: "Smaller and significantly spicier than Jalapenos. Drought stress increases the heat." }]},
-  "Thai Hot": { color: "#e63946", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", phases: [{ name: "Frame Building", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4.", pruning: "Pluck first blossoms.", tip: "Pinch early flowers to build a strong canopy." }, { name: "Spice Forcing", startDay: 45, waterDays: 5, water: "Drought stress before harvest.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4).", pruning: "Snip with shears.", tip: "Produces hundreds of tiny peppers facing straight up at the sky. They turn bright red when fully spicy." }]},
-  "Shishito": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "60-70 days", phases: [{ name: "Growth", startDay: 0, waterDays: 3, water: "Consistent deep watering.", feedDays: 21, feed: "Start with 4-4-4.", pruning: "Pluck first blossoms.", tip: "Build the frame before letting it fruit." }, { name: "Harvesting", startDay: 40, waterDays: 3, water: "Standard soak.", feedDays: 14, feed: "Fruiting Fertilizer (2-8-4).", pruning: "Harvest continuously.", tip: "Harvest when they are 2-3 inches long, green, and very wrinkled. Roughly 1 in 10 will be spicy." }]},
-  "Marigold": { color: "#fb8500", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50 days", phases: [{ name: "Bloom", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None required.", pruning: "Deadhead dead flowers.", tip: "The roots secrete a chemical that actively kills root-knot nematodes in the soil." }]},
-  "Nasturtiums": { color: "#ff5400", method: "DIRECT SOW (Precision Poke)", quantity: "2 seeds", depth: "1 inch", harvest: "55-65 days", phases: [{ name: "Bloom", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None required.", pruning: "Cascade over the bed edge.", tip: "A sacrificial trap crop. Aphids will attack this instead of your vegetables." }]},
-  "Calendula": { color: "#ffb703", method: "DIRECT SOW (Precision Poke)", quantity: "1 seed", depth: "1/4 inch", harvest: "50-60 days", phases: [{ name: "Bloom", startDay: 0, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None required.", pruning: "Deadhead spent blooms.", tip: "Attracts predatory insects that hunt garden pests." }]},
+  // DIRECT SOWN CROPS
+  "Radishes": { color: "#ff8fab", method: "DIRECT SOW", quantity: "16 seeds", depth: "1/2 inch", harvest: "25-30 days", phases: [
+    { name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist the vermiculite daily to prevent drying out.", feedDays: null, feed: "None", pruning: "Do not touch surface.", tip: "Vermiculite acts as a sponge. Keep it damp." }, 
+    { name: "Sprouting", startDay: 5, waterDays: 1, water: "Daily mist.", feedDays: 14, feed: "Light Fish Emulsion (5-1-1)", pruning: "Snip weakest sprouts.", tip: "Roots are pushing down." }, 
+    { name: "Bulbing", startDay: 15, waterDays: 2, water: "Standard soak.", feedDays: null, feed: "None", pruning: "Keep weed-free.", tip: "Bulbs are swelling rapidly." },
+    { name: "Harvest Ready", startDay: 25, waterDays: 2, water: "Standard soak.", feedDays: null, feed: "None", pruning: "Pull them!", tip: "Harvest promptly to free up root space for neighboring crops." }
+  ]},
+  "Carrots": { color: "#ffb703", method: "DIRECT SOW", quantity: "Thin to 9", depth: "1/4 inch", harvest: "70-80 days", phases: [
+    { name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist the vermiculite daily to prevent drying out.", feedDays: null, feed: "None", pruning: "Do not touch surface.", tip: "Carrots are incredibly slow. Keep the vermiculite moist." }, 
+    { name: "Germination", startDay: 14, waterDays: 2, water: "Surface misting every 2 days.", feedDays: null, feed: "None", pruning: "Wait to thin.", tip: "They look like tiny blades of grass." }, 
+    { name: "Maturation", startDay: 30, waterDays: 3, water: "Deep soak every 3 days.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Thin down to 9 per sq ft.", tip: "Cut weeds at the base so you don't disturb the taproots." }, 
+    { name: "Harvest Window", startDay: 70, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None", pruning: "Pull as needed.", tip: "Leave them in the ground until you need them." }
+  ]},
+  "Buttercrunch & Romaine": { color: "#90be6d", method: "DIRECT SOW", quantity: "4 seeds", depth: "Surface", harvest: "55-65 days", phases: [
+    { name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist the vermiculite daily.", feedDays: null, feed: "None", pruning: "None.", tip: "Lettuce needs light to germinate. Press into dirt, top lightly with vermiculite." }, 
+    { name: "Seedling", startDay: 7, waterDays: 2, water: "Keep surface damp.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "Snip weakest sprouts.", tip: "Let them establish." }, 
+    { name: "Growth & Harvest", startDay: 25, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Fish Emulsion", pruning: "Harvest outer leaves.", tip: "Pick the outermost leaves for salads and the center will keep growing." }
+  ]},
+  "Arugula": { color: "#73a942", method: "DIRECT SOW", quantity: "Thin to 9", depth: "1/2 inch", harvest: "40-50 days", phases: [
+    { name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist the vermiculite daily.", feedDays: null, feed: "None", pruning: "None.", tip: "Keep surface moist." }, 
+    { name: "Seedling", startDay: 7, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "Thin to 9 plants.", tip: "Watch for flea beetles." }, 
+    { name: "Continuous Harvest", startDay: 30, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "Cut leaves 1 inch above soil.", tip: "Never pull roots. Cut leaves and it regrows." }
+  ]},
+  "Spinach": { color: "#538d22", method: "DIRECT SOW", quantity: "9 seeds", depth: "1/2 inch", harvest: "40-50 days", phases: [
+    { name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist the vermiculite daily.", feedDays: null, feed: "None", pruning: "None.", tip: "Prefers cool soil." }, 
+    { name: "Seedling", startDay: 7, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "Keep weed free.", tip: "Establishing taproot." }, 
+    { name: "Continuous Harvest", startDay: 35, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "Cut outermost leaves.", tip: "Shade with taller crops later in the season." }
+  ]},
+  "Parsley": { color: "#a7c957", method: "DIRECT SOW", quantity: "2 seeds", depth: "1/4 inch", harvest: "60-70 days", phases: [
+    { name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist the vermiculite daily.", feedDays: null, feed: "None", pruning: "None.", tip: "Extremely slow to germinate." }, 
+    { name: "Seedling", startDay: 14, waterDays: 2, water: "Mist until strong.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Snip weakest sprout.", tip: "Let it establish." }, 
+    { name: "Growth & Harvest", startDay: 30, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Snip stems from outside in.", tip: "Harvest outer edge so center pushes new growth." }
+  ]},
+  "Cilantro": { color: "#a7c957", method: "DIRECT SOW", quantity: "2 seeds", depth: "1/4 inch", harvest: "60-70 days", phases: [
+    { name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist the vermiculite daily.", feedDays: null, feed: "None", pruning: "None.", tip: "Crack seed shell gently before planting to speed up." }, 
+    { name: "Seedling", startDay: 14, waterDays: 2, water: "Mist until strong.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Snip weakest sprout.", tip: "Establishing." }, 
+    { name: "Growth & Harvest", startDay: 30, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Harvest aggressively.", tip: "Bolts in high heat. Cut often to delay flowering." }
+  ]},
+  "Sugar Snap Peas": { color: "#d9ed92", method: "DIRECT SOW", quantity: "9 seeds", depth: "1 inch", harvest: "60-70 days", phases: [
+    { name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist surface daily.", feedDays: null, feed: "None", pruning: "None.", tip: "Keep damp." }, 
+    { name: "Seedling", startDay: 10, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Guide tendrils to trellis.", tip: "Get them climbing early." }, 
+    { name: "Vining & Climbing", startDay: 25, waterDays: 2, water: "Standard soak.", feedDays: null, feed: "None (Nitrogen Fixer)", pruning: "Train up the net.", tip: "Building frame." },
+    { name: "Continuous Harvest", startDay: 50, waterDays: 2, water: "Standard soak.", feedDays: null, feed: "None", pruning: "Harvest every 1-2 days.", tip: "The more you pick, the more flowers it pushes." }
+  ]},
+
+  // TRANSPLANTS
+  "Red Onions": { color: "#cda4f4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", phases: [
+    { name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Keep moist.", feedDays: 14, feed: "Transplant fertilizer at base.", pruning: "Hand-pull ALL weeds.", tip: "Recovering from root shock." }, 
+    { name: "Vegetative Growth", startDay: 14, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion", pruning: "Hand-pull weeds.", tip: "Pushing up green tops." }, 
+    { name: "Bulb Swelling", startDay: 45, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion", pruning: "Keep weed-free.", tip: "Bulbs are physically expanding." },
+    { name: "Harvest Ready (Curing)", startDay: 90, waterDays: null, water: "CRITICAL: STOP WATERING.", feedDays: null, feed: "None.", pruning: "Do not touch them.", tip: "Green tops flopped over? Let sit in dry dirt 1 week to cure skins." }
+  ]},
+  "Walla Walla Onions": { color: "#fcefb4", method: "TRANSPLANT", quantity: "4 plants", depth: "Root depth", harvest: "90-110 days", phases: [
+    { name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Keep moist.", feedDays: 14, feed: "Transplant fertilizer at base.", pruning: "Hand-pull ALL weeds.", tip: "Recovering from root shock." }, 
+    { name: "Vegetative Growth", startDay: 14, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion", pruning: "Hand-pull weeds.", tip: "Pushing up green tops." }, 
+    { name: "Bulb Swelling", startDay: 45, waterDays: 3, water: "Standard deep soak.", feedDays: 28, feed: "Fish Emulsion", pruning: "Keep weed-free.", tip: "Bulbs are physically expanding." },
+    { name: "Harvest Ready (Curing)", startDay: 90, waterDays: null, water: "CRITICAL: STOP WATERING.", feedDays: null, feed: "None.", pruning: "Do not touch them.", tip: "Green tops flopped over? Let sit in dry dirt 1 week to cure skins." }
+  ]},
+  "Broccoli": { color: "#4c956c", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", phases: [
+    { name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Keep moist.", feedDays: 14, feed: "Transplant fertilizer at base.", pruning: "Watch for shock.", tip: "Letting roots settle." }, 
+    { name: "Heavy Growth", startDay: 14, waterDays: 3, water: "Deep soak 2-3x a week.", feedDays: 21, feed: "High Nitrogen (2 Tbsp/gal)", pruning: "Check under leaves for eggs.", tip: "Heavy feeder pushing giant leaves." }, 
+    { name: "Head Formation", startDay: 45, waterDays: 3, water: "Deep soak.", feedDays: 21, feed: "High Nitrogen", pruning: "Watch crown.", tip: "The crown is forming." },
+    { name: "Harvest Ready (Main Head)", startDay: 60, waterDays: 3, water: "Deep soak.", feedDays: 21, feed: "High Nitrogen", pruning: "Cut main head before it flowers.", tip: "Cut the big head while tight! Leave the plant for side-shoots." },
+    { name: "Side-Shoots", startDay: 65, waterDays: 3, water: "Deep soak.", feedDays: 21, feed: "High Nitrogen", pruning: "Harvest mini-florets.", tip: "Plant will push small florets for weeks." }
+  ]},
+  "Kale": { color: "#2c6e49", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", phases: [
+    { name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Keep moist.", feedDays: 14, feed: "Transplant fertilizer.", pruning: "Watch for shock.", tip: "Letting roots settle." }, 
+    { name: "Growth", startDay: 14, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion", pruning: "Harvest outermost leaves.", tip: "Twist leaves off downwards." }, 
+    { name: "Continuous Harvest", startDay: 50, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion", pruning: "Keep harvesting.", tip: "A light frost will make the leaves sweeter." }
+  ]},
+  "Collard Greens": { color: "#6a994e", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50-70 days", phases: [
+    { name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Keep moist.", feedDays: 14, feed: "Transplant fertilizer.", pruning: "Watch for shock.", tip: "Letting roots settle." }, 
+    { name: "Growth", startDay: 14, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion", pruning: "Harvest outermost leaves.", tip: "Harvest from bottom up. It will look like a palm tree." },
+    { name: "Continuous Harvest", startDay: 50, waterDays: 3, water: "Standard soak.", feedDays: 21, feed: "High Nitrogen Fish Emulsion", pruning: "Keep harvesting.", tip: "Huge leaves are ready." }
+  ]},
+
+  // OTHER CROPS (Future-proofed placeholders for May)
+  "Green Beans": { color: "#b5e48c", method: "DIRECT SOW", quantity: "9 seeds", depth: "1 inch", harvest: "50-60 days", phases: [{ name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist surface.", feedDays: null, feed: "None", pruning: "-", tip: "Keep damp." }, { name: "Seedling", startDay: 10, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Guide to trellis.", tip: "Nitrogen fixers." }, { name: "Continuous Harvest", startDay: 45, waterDays: 2, water: "Standard soak.", feedDays: null, feed: "None", pruning: "Harvest every 1-2 days.", tip: "Pick slender." }]},
+  "Cucumbers": { color: "#52b788", method: "DIRECT SOW", quantity: "2 seeds", depth: "1 inch", harvest: "50-70 days", phases: [{ name: "Sown (Pre-Emergence)", startDay: 0, waterDays: 1, water: "Mist surface.", feedDays: null, feed: "None", pruning: "-", tip: "Keep damp." }, { name: "Vining", startDay: 10, waterDays: 2, water: "Heavy soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "Train vine.", tip: "Heavy drinkers." }, { name: "Continuous Harvest", startDay: 45, waterDays: 2, water: "Heavy soak.", feedDays: 14, feed: "Fruiting Fertilizer", pruning: "Pick daily.", tip: "Thirsty cucumbers turn bitter." }]},
+  "Roma Tomato": { color: "#e63946", method: "TRANSPLANT", quantity: "1 plant", depth: "Bury stem deep", harvest: "65-85 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Deep soak.", feedDays: 14, feed: "Starter fertilizer.", pruning: "Strip bottom leaves.", tip: "Building taproot." }, { name: "Vegetative Growth", startDay: 14, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Switch to 2-8-4.", pruning: "Pinch suckers.", tip: "Vining out." }, { name: "Harvest Window", startDay: 65, waterDays: 5, water: "Cut water 50%.", feedDays: 14, feed: "Fruiting Fertilizer", pruning: "Maintain airflow.", tip: "Drought stress forces flavor." }]},
+  "Beefsteak": { color: "#d62828", method: "TRANSPLANT", quantity: "1 plant", depth: "Bury stem deep", harvest: "80-90 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Deep soak.", feedDays: 14, feed: "Starter fertilizer.", pruning: "Strip bottom leaves.", tip: "Building taproot." }, { name: "Vegetative Growth", startDay: 14, waterDays: 3, water: "Deep root soak.", feedDays: 14, feed: "Switch to 2-8-4.", pruning: "Pinch suckers.", tip: "Vining out." }, { name: "Harvest Window", startDay: 75, waterDays: 5, water: "Cut water 50%.", feedDays: 14, feed: "Fruiting Fertilizer", pruning: "Maintain airflow.", tip: "Drought stress forces flavor." }]},
+  "Cherry Tomato": { color: "#f25c54", method: "TRANSPLANT", quantity: "1 plant", depth: "Bury stem deep", harvest: "65-75 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Deep soak.", feedDays: 14, feed: "Starter fertilizer.", pruning: "Strip bottom leaves.", tip: "Building taproot." }, { name: "Wild Fruiting", startDay: 30, waterDays: 4, water: "Deep root soak.", feedDays: 14, feed: "Switch to 2-8-4.", pruning: "Let vine out.", tip: "Chaotic grower." }, { name: "Continuous Harvest", startDay: 60, waterDays: 4, water: "Deep root soak.", feedDays: 14, feed: "Fruiting Fertilizer", pruning: "Harvest.", tip: "Enjoy." }]},
+  "Tomatillo": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 plant", depth: "Bury stem deep", harvest: "65-85 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Deep soak.", feedDays: 14, feed: "Starter fertilizer.", pruning: "Cage.", tip: "Settle." }, { name: "Growth & Bloom", startDay: 14, waterDays: 3, water: "Deep root soak.", feedDays: 21, feed: "Fruiting Fertilizer", pruning: "Support branches.", tip: "Requires 2 plants to pollinate." }, { name: "Continuous Harvest", startDay: 60, waterDays: 3, water: "Deep soak.", feedDays: 21, feed: "Fruiting Fertilizer", pruning: "Harvest.", tip: "Husk splits when ready." }]},
+  "Bell Pepper": { color: "#f4a261", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Deep soak.", feedDays: 14, feed: "Starter fertilizer.", pruning: "-", tip: "Settle." }, { name: "Frame Building", startDay: 14, waterDays: 3, water: "Consistent soak.", feedDays: 21, feed: "4-4-4.", pruning: "Pluck first blossoms.", tip: "Build strong canopy." }, { name: "Continuous Harvest", startDay: 65, waterDays: 4, water: "Slight stress.", feedDays: 14, feed: "Fruiting Fertilizer", pruning: "Harvest.", tip: "Turns red if left on plant." }]},
+  "Jalapeno": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Deep soak.", feedDays: 14, feed: "Starter fertilizer.", pruning: "-", tip: "Settle." }, { name: "Frame Building", startDay: 14, waterDays: 3, water: "Consistent soak.", feedDays: 21, feed: "4-4-4.", pruning: "Pluck first blossoms.", tip: "Build strong canopy." }, { name: "Harvest Window (Spice)", startDay: 65, waterDays: 5, water: "Drought stress.", feedDays: 14, feed: "Fruiting Fertilizer", pruning: "Harvest.", tip: "Stress forces capsaicin spike." }]},
+  "Serrano": { color: "#2a9d8f", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Deep soak.", feedDays: 14, feed: "Starter fertilizer.", pruning: "-", tip: "Settle." }, { name: "Frame Building", startDay: 14, waterDays: 3, water: "Consistent soak.", feedDays: 21, feed: "4-4-4.", pruning: "Pluck first blossoms.", tip: "Build strong canopy." }, { name: "Harvest Window (Spice)", startDay: 65, waterDays: 5, water: "Drought stress.", feedDays: 14, feed: "Fruiting Fertilizer", pruning: "Harvest.", tip: "Stress forces capsaicin spike." }]},
+  "Thai Hot": { color: "#e63946", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "70-80 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Deep soak.", feedDays: 14, feed: "Starter fertilizer.", pruning: "-", tip: "Settle." }, { name: "Frame Building", startDay: 14, waterDays: 3, water: "Consistent soak.", feedDays: 21, feed: "4-4-4.", pruning: "Pluck first blossoms.", tip: "Build strong canopy." }, { name: "Harvest Window (Spice)", startDay: 65, waterDays: 5, water: "Drought stress.", feedDays: 14, feed: "Fruiting Fertilizer", pruning: "Harvest.", tip: "Stress forces capsaicin spike." }]},
+  "Shishito": { color: "#a7c957", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "60-70 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Deep soak.", feedDays: 14, feed: "Starter fertilizer.", pruning: "-", tip: "Settle." }, { name: "Frame Building", startDay: 14, waterDays: 3, water: "Consistent soak.", feedDays: 21, feed: "4-4-4.", pruning: "Pluck first blossoms.", tip: "Build strong canopy." }, { name: "Continuous Harvest", startDay: 50, waterDays: 3, water: "Standard soak.", feedDays: 14, feed: "Fruiting Fertilizer", pruning: "Harvest continuously.", tip: "Pick green and wrinkled." }]},
+  "Basil": { color: "#74c69d", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "-", tip: "Settle." }, { name: "Continuous Harvest", startDay: 14, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Pinch top clusters.", tip: "Never let it flower." }]},
+  "Thai Basil": { color: "#52b788", method: "TRANSPLANT", quantity: "4 plants", depth: "Crown level", harvest: "30-40 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: 14, feed: "Light Fish Emulsion", pruning: "-", tip: "Settle." }, { name: "Continuous Harvest", startDay: 14, waterDays: 2, water: "Standard soak.", feedDays: 21, feed: "Light Fish Emulsion", pruning: "Pinch top clusters.", tip: "Never let it flower." }]},
+  "Marigold": { color: "#fb8500", method: "TRANSPLANT", quantity: "1 plant", depth: "Crown level", harvest: "50 days", phases: [{ name: "Transplant Acclimation", startDay: 0, waterDays: 2, water: "Standard soak.", feedDays: null, feed: "None.", pruning: "-", tip: "Settle." }, { name: "Bloom", startDay: 10, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None.", pruning: "Deadhead.", tip: "Kills root nematodes." }]},
+  "Nasturtiums": { color: "#ff5400", method: "DIRECT SOW", quantity: "2 seeds", depth: "1 inch", harvest: "55-65 days", phases: [{ name: "Sown", startDay: 0, waterDays: 1, water: "Mist surface.", feedDays: null, feed: "None.", pruning: "-", tip: "Keep damp." }, { name: "Bloom", startDay: 20, waterDays: 3, water: "Standard soak.", feedDays: null, feed: "None.", pruning: "Cascade.", tip: "Trap crop." }]},
   "SubPod": { color: "#ebd9c8", method: "INFRASTRUCTURE", quantity: "-", depth: "-", harvest: "Continuous", phases: [{ name: "Active", startDay: 0, waterDays: null, water: "Keep moist.", feedDays: null, feed: "Kitchen scraps", pruning: "-", tip: "The nutrient engine. Add brown cardboard with food scraps to balance carbon." }] },
   "Open Space": { color: "#e9ecef", method: "-", quantity: "0", depth: "-", harvest: "-", phases: [{ name: "Empty", startDay: 0, waterDays: null, water: "-", feedDays: null, feed: "-", pruning: "-", tip: "Reserved area." }] }
 };
 
 const masterCatalog = {
-  "🌱 Seed Packets": ["Radish Seeds", "Carrot Seeds", "Beet Seeds", "Lettuce Seeds", "Arugula Seeds", "Spinach Seeds", "Swiss Chard Seeds", "Pea Seeds", "Green Bean Seeds", "Cucumber Seeds", "Zucchini Seeds", "Butternut Squash Seeds", "Pumpkin Seeds", "Sweet Corn Seeds", "Red Onion Seeds", "Yellow Onion Seeds", "Broccoli Seeds", "Cabbage Seeds", "Kale Seeds", "Collard Greens Seeds", "Roma Tomato Seeds", "Beefsteak Tomato Seeds", "Cherry Tomato Seeds", "Tomatillo Seeds", "Eggplant Seeds", "Bell Pepper Seeds", "Jalapeno Seeds", "Serrano Seeds", "Thai Hot Seeds", "Shishito Seeds", "Basil Seeds", "Thai Basil Seeds", "Cilantro Seeds", "Parsley Seeds", "Marigold Seeds", "Nasturtium Seeds", "Calendula Seeds", "Sunflower Seeds"],
-  "🪴 Transplants": ["Lettuce Starts", "Arugula Starts", "Spinach Starts", "Swiss Chard Starts", "Pea Starts", "Green Bean Starts", "Cucumber Starts", "Zucchini Starts", "Butternut Squash Starts", "Pumpkin Starts", "Sweet Corn Starts", "Red Onion Starts", "Yellow Onion Starts", "Broccoli Starts", "Cabbage Starts", "Kale Starts", "Collard Greens Starts", "Roma Tomato Starts", "Beefsteak Starts", "Cherry Tomato Starts", "Tomatillo Starts", "Eggplant Starts", "Bell Pepper Starts", "Jalapeno Starts", "Serrano Starts", "Thai Hot Starts", "Shishito Starts", "Basil Starts", "Thai Basil Starts", "Cilantro Starts", "Parsley Starts", "Marigold Starts", "Nasturtium Starts", "Calendula Starts", "Sunflower Starts"],
+  "🌱 Seed Packets": ["Radish Seeds", "Carrot Seeds", "Beet Seeds", "Lettuce Seeds", "Arugula Seeds", "Spinach Seeds", "Swiss Chard Seeds", "Pea Seeds", "Green Bean Seeds", "Cucumber Seeds", "Zucchini Seeds", "Butternut Squash Seeds", "Pumpkin Seeds", "Sweet Corn Seeds", "Red Onion Seeds", "Walla Walla Onion Seeds", "Broccoli Seeds", "Cabbage Seeds", "Kale Seeds", "Collard Greens Seeds", "Roma Tomato Seeds", "Beefsteak Tomato Seeds", "Cherry Tomato Seeds", "Tomatillo Seeds", "Eggplant Seeds", "Bell Pepper Seeds", "Jalapeno Seeds", "Serrano Seeds", "Thai Hot Seeds", "Shishito Seeds", "Basil Seeds", "Thai Basil Seeds", "Cilantro Seeds", "Parsley Seeds", "Marigold Seeds", "Nasturtium Seeds", "Sunflower Seeds"],
+  "🪴 Transplants": ["Lettuce Starts", "Arugula Starts", "Spinach Starts", "Swiss Chard Starts", "Pea Starts", "Green Bean Starts", "Cucumber Starts", "Zucchini Starts", "Butternut Squash Starts", "Pumpkin Starts", "Sweet Corn Starts", "Red Onion Starts", "Walla Walla Onion Starts", "Broccoli Starts", "Cabbage Starts", "Kale Starts", "Collard Greens Starts", "Roma Tomato Starts", "Beefsteak Starts", "Cherry Tomato Starts", "Tomatillo Starts", "Eggplant Starts", "Bell Pepper Starts", "Jalapeno Starts", "Serrano Starts", "Thai Hot Starts", "Shishito Starts", "Basil Starts", "Thai Basil Starts", "Cilantro Starts", "Parsley Starts", "Marigold Starts", "Nasturtium Starts", "Sunflower Starts"],
   "🪨 Soils & Amendments": ["Organic Compost (Bag)", "Potting Soil (Bag)", "Coco Coir (Brick)", "Vermiculite (Bag)", "Perlite (Bag)", "Fish Emulsion (5-1-1)", "Fruiting Fertilizer (2-8-4)", "Bone Meal", "Blood Meal", "Kelp Meal", "Mycorrhizal Fungi", "Worm Blanket", "SubPod Carbon Bedding", "Straw Mulch"],
   "🛠️ Hardware": ["Drip Tubing (1/2\")", "Drip Tubing (1/4\")", "Drip Emitters", "Irrigation Stakes", "Hose Timer", "Tomato Cages", "Trellis Netting", "Korean EZ Digger", "Pruning Snips", "Twine", "Seedling Trays", "Heat Mat", "Grow Lights", "Plant Tags", "Neem Oil", "Slug/Snail Bait", "Frost Cover"]
 };
@@ -94,9 +157,6 @@ const checkNeedsAttention = (plantName, timestamps, type) => {
   return daysSince >= limit;
 };
 
-// ==========================================
-// STARDEW DATE & REAL TIME LOGIC
-// ==========================================
 const getStardewSeason = () => {
   const month = new Date().getMonth(); 
   if (month >= 2 && month <= 4) return "Spring"; 
@@ -109,44 +169,26 @@ const getRealDateTime = () => {
   const now = new Date();
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const dateStr = `${monthNames[now.getMonth()]} ${now.getDate()}`;
-
   let hours = now.getHours();
   const minutes = now.getMinutes();
   const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12;
-  hours = hours ? hours : 12;
+  hours = hours % 12 || 12;
   const minutesStr = minutes < 10 ? '0' + minutes : minutes;
-
   return `${dateStr} • ${hours}:${minutesStr} ${ampm}`;
 };
 
-// ==========================================
-// OPEN-METEO LOGIC
-// ==========================================
 const getWMOEmoji = (code, isNight = false) => {
   if (code === 0) return isNight ? '🌙' : '☀️';
-  if (code === 1) return isNight ? '🌤️' : '🌤️';
-  if (code === 2) return '⛅';
-  if (code === 3) return '☁️';
-  if ([45, 48].includes(code)) return '🌫️';
-  if ([51, 53, 55, 56, 57].includes(code)) return '🌧️'; // Drizzle
-  if ([61, 63, 65, 66, 67].includes(code)) return '🌧️'; // Rain
-  if ([71, 73, 75, 77, 85, 86].includes(code)) return '❄️'; // Snow
-  if ([80, 81, 82].includes(code)) return '🌦️'; // Showers
-  if ([95, 96, 99].includes(code)) return '⛈️'; // Thunderstorm
-  return '🌤️';
+  if ([1, 2, 3].includes(code)) return '☁️';
+  if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return '🌧️';
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return '❄️';
+  return '⛅';
 };
 
 const getWMODesc = (code) => {
   if (code === 0) return 'Clear';
-  if (code === 1) return 'Mostly Clear';
-  if (code === 2) return 'Partly Cloudy';
-  if (code === 3) return 'Overcast';
-  if ([45, 48].includes(code)) return 'Fog';
-  if ([51, 53, 55, 56, 57].includes(code)) return 'Drizzle';
-  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return 'Rain';
-  if ([71, 73, 75, 77, 85, 86].includes(code)) return 'Snow';
-  if ([95, 96, 99].includes(code)) return 'Storms';
+  if ([1, 2, 3].includes(code)) return 'Cloudy';
+  if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return 'Rain';
   return 'Varied';
 };
 
@@ -202,18 +244,16 @@ const GridRenderer = ({ title, bedId, columns, data, onPlantClick, onBedClick, t
 // MAIN APP COMPONENT
 // ==========================================
 export default function App() {
-  const [currentView, setCurrentView] = useState('planner'); // 'planner' or 'shop'
+  const [currentView, setCurrentView] = useState('planner');
   const [selectedPlant, setSelectedPlant] = useState(null);
   const [selectedBed, setSelectedBed] = useState(null);
   const [showFieldGuide, setShowFieldGuide] = useState(false);
   const [timestamps, setTimestamps] = useState({});
   const [timestampsLoaded, setTimestampsLoaded] = useState(false);
   
-  // Weather Data State
   const [weatherData, setWeatherData] = useState(null);
   const [timeData, setTimeData] = useState({ season: getStardewSeason(), realTime: getRealDateTime() });
   
-  // Shop States
   const [shoppingList, setShoppingList] = useState({});
   const [catSelection, setCatSelection] = useState("🌱 Seed Packets");
   const [itemSelection, setItemSelection] = useState(masterCatalog["🌱 Seed Packets"][0]);
@@ -221,7 +261,6 @@ export default function App() {
   const [customName, setCustomName] = useState("");
   const [customQty, setCustomQty] = useState(1);
 
-  // 1. Clock Tracker
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeData({ season: getStardewSeason(), realTime: getRealDateTime() });
@@ -229,7 +268,6 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
-  // 2. Firebase Load
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "gardenData", "chores"), (docSnap) => {
       if (docSnap.exists()) setTimestamps(docSnap.data());
@@ -242,58 +280,35 @@ export default function App() {
     return () => { unsub(); unsubShop(); };
   }, []);
 
-  // 3. Open-Meteo Weather Fetch
   useEffect(() => {
     if (!timestampsLoaded) return;
     const fetchWeather = async () => {
       try {
-        const lat = 45.43490497216875; // My Garden
-        const lon = -122.85666196045891;
+        const lat = 45.4349; 
+        const lon = -122.8566;
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&hourly=temperature_2m,weather_code&temperature_unit=fahrenheit&precipitation_unit=inch&wind_speed_unit=mph&timezone=America%2FLos_Angeles&forecast_days=2`;
-        
         const res = await fetch(url);
         const data = await res.json();
-
-        // Extract Current
         const currentTemp = data.current.temperature_2m;
         const currentCode = data.current.weather_code;
-        
-        // Extract next 12 hours from the hourly array
         const nowEpoch = new Date().getTime();
-        // Find the index of the hour that matches right now
         const startIndex = data.hourly.time.findIndex(t => new Date(t).getTime() >= nowEpoch) || 0;
-        
         const next12 = [];
-        for(let i=1; i<=12; i++) { // Skip index 0 (current hour) and grab the next 12
+        for(let i=1; i<=12; i++) { 
            const tStr = data.hourly.time[startIndex + i];
-           const temp = data.hourly.temperature_2m[startIndex + i];
-           const code = data.hourly.weather_code[startIndex + i];
-           
-           // Format time like "3 PM"
            const dateObj = new Date(tStr);
            let hr = dateObj.getHours();
            const ampm = hr >= 12 ? 'PM' : 'AM';
-           hr = hr % 12;
-           hr = hr ? hr : 12;
-
-           next12.push({ 
-             displayTime: `${hr} ${ampm}`, 
-             temp: temp, 
-             code: code,
-             isNight: dateObj.getHours() >= 18 || dateObj.getHours() < 6
-           });
+           hr = hr % 12 || 12;
+           next12.push({ displayTime: `${hr} ${ampm}`, temp: data.hourly.temperature_2m[startIndex + i], code: data.hourly.weather_code[startIndex + i], isNight: dateObj.getHours() >= 18 || dateObj.getHours() < 6 });
         }
-
         setWeatherData({ current: { temp: currentTemp, code: currentCode }, hourly: next12 });
-
-        // Auto Rain Logic using WMO Codes
         const rainCodes = [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99];
         if (rainCodes.includes(currentCode)) {
           const todayStr = new Date().toDateString();
           if (timestamps['system']?.lastNatureWater !== todayStr) triggerNatureWatering(todayStr, timestamps);
         }
-
-      } catch (error) { console.error("Open-Meteo Weather error", error); }
+      } catch (error) { console.error("Weather error", error); }
     };
     fetchWeather();
   }, [timestampsLoaded]); 
@@ -326,21 +341,14 @@ export default function App() {
     await setDoc(doc(db, "gardenData", "chores"), currentData, { merge: true });
   };
 
-  // --- SHOPPING LIST LOGIC ---
   const handleAddToList = async (name, qty) => {
     if (!name.trim()) return;
     const count = parseInt(qty) || 1;
     const currentData = { ...shoppingList };
-    if (currentData[name]) {
-      currentData[name].quantity += count;
-      currentData[name].checked = false; 
-    } else {
-      currentData[name] = { quantity: count, checked: false };
-    }
+    if (currentData[name]) { currentData[name].quantity += count; currentData[name].checked = false; }
+    else { currentData[name] = { quantity: count, checked: false }; }
     await setDoc(doc(db, "gardenData", "shoppingList"), currentData);
-    setCustomName("");
-    setCustomQty(1);
-    setCatalogQty(1);
+    setCustomName(""); setCustomQty(1); setCatalogQty(1);
   };
 
   const toggleShopItem = async (name) => {
@@ -351,15 +359,14 @@ export default function App() {
 
   const clearCheckedItems = async () => {
     const currentData = { ...shoppingList };
-    Object.keys(currentData).forEach(key => {
-      if (currentData[key].checked) delete currentData[key];
-    });
+    Object.keys(currentData).forEach(key => { if (currentData[key].checked) delete currentData[key]; });
     await setDoc(doc(db, "gardenData", "shoppingList"), currentData);
   };
 
+  // UPDATED ROSTERS
   const bed1 = ["SubPod", "SubPod", "SubPod", "Radishes", "Carrots", "Buttercrunch & Romaine", "SubPod", "SubPod", "SubPod", "Radishes", "Carrots", "Arugula", "SubPod", "SubPod", "SubPod", "Radishes", "Carrots", "Spinach"];
-  const bed2 = ["Red Onions", "Red Onions", "Yellow Onions", "Yellow Onions", "Parsley", "Calendula", "Red Onions", "Red Onions", "Yellow Onions", "Yellow Onions", "Parsley", "Open Space", "Red Onions", "Red Onions", "Yellow Onions", "Yellow Onions", "Cilantro", "Cilantro"];
-  const bed3 = ["Broccoli", "Broccoli", "Dwarf Siberian Kale", "Dwarf Siberian Kale", "Collard Greens", "Collard Greens", "Broccoli", "Broccoli", "Dwarf Siberian Kale", "Dwarf Siberian Kale", "Collard Greens", "Collard Greens", "Broccoli", "Broccoli", "Dwarf Siberian Kale", "Dwarf Siberian Kale", "Collard Greens", "Collard Greens"];
+  const bed2 = ["Red Onions", "Red Onions", "Walla Walla Onions", "Walla Walla Onions", "Parsley", "Parsley", "Red Onions", "Red Onions", "Walla Walla Onions", "Walla Walla Onions", "Parsley", "Cilantro", "Red Onions", "Red Onions", "Walla Walla Onions", "Walla Walla Onions", "Cilantro", "Cilantro"];
+  const bed3 = ["Broccoli", "Broccoli", "Kale", "Kale", "Collard Greens", "Collard Greens", "Broccoli", "Broccoli", "Kale", "Kale", "Collard Greens", "Collard Greens", "Broccoli", "Broccoli", "Kale", "Kale", "Collard Greens", "Collard Greens"];
   const bed4 = ["Sugar Snap Peas", "Sugar Snap Peas", "Sugar Snap Peas", "Bell Pepper", "Jalapeno", "Serrano", "Thai Hot", "Shishito", "Marigold"];
   const bed5 = ["Cucumbers", "Cucumbers", "Cucumbers", "Green Beans", "Green Beans", "Green Beans", "Nasturtiums", "Nasturtiums", "Nasturtiums"];
   const bed6 = ["Tomatillo", "Open Space", "Open Space", "Open Space", "Tomatillo", "Open Space", "Open Space", "Open Space", "Open Space"];
@@ -375,56 +382,32 @@ export default function App() {
     isPlanted = !!timestamps[info.name]?.planted;
   }
 
-  const currentHourNum = new Date().getHours();
-  const isCurrentlyNight = currentHourNum >= 18 || currentHourNum < 6;
+  const isCurrentlyNight = new Date().getHours() >= 18 || new Date().getHours() < 6;
 
   return (
     <div className="container">
       <h1>{currentView === 'planner' ? "GARDEN PLANNER 2026" : "CAROL'S SHOP"}</h1>
       
-      {/* STARDEW DATE & TIME HUD */}
       <div className="stardew-hud">
         <div className="sd-season">{timeData.season}</div>
         <div className="sd-time-row">{timeData.realTime}</div>
       </div>
 
-      {/* NAVIGATION TABS */}
       <div className="action-buttons" style={{ marginBottom: '25px' }}>
-        <button 
-          className="btn-action feed" 
-          onClick={() => setCurrentView('planner')}
-          style={{ opacity: currentView === 'planner' ? 1 : 0.5 }}
-        >
-          🪴 The Garden
-        </button>
-        <button 
-          className="btn-action water" 
-          onClick={() => setCurrentView('shop')}
-          style={{ opacity: currentView === 'shop' ? 1 : 0.5, backgroundColor: currentView === 'shop' ? '#d62828' : '#823c11' }}
-        >
-          🛒 Carol's Shop
-        </button>
+        <button className="btn-action feed" onClick={() => setCurrentView('planner')} style={{ opacity: currentView === 'planner' ? 1 : 0.5 }}>🪴 The Garden</button>
+        <button className="btn-action water" onClick={() => setCurrentView('shop')} style={{ opacity: currentView === 'shop' ? 1 : 0.5, backgroundColor: currentView === 'shop' ? '#d62828' : '#823c11' }}>🛒 Carol's Shop</button>
       </div>
 
-      {/* ========================================== */}
-      {/* SHOPPING LIST VIEW */}
-      {/* ========================================== */}
       {currentView === 'shop' && (
         <div>
           <div className="bed-section" style={{ backgroundColor: '#fce7b1' }}>
             <div className="bed-header" style={{ backgroundColor: '#823c11' }}>Catalog Entry</div>
-            
-            <select className="sd-select" value={catSelection} onChange={(e) => {
-              setCatSelection(e.target.value);
-              setItemSelection(masterCatalog[e.target.value][0]);
-            }}>
+            <select className="sd-select" value={catSelection} onChange={(e) => { setCatSelection(e.target.value); setItemSelection(masterCatalog[e.target.value][0]); }}>
               {Object.keys(masterCatalog).map(cat => <option key={cat} value={cat}>{cat}</option>)}
             </select>
-            
             <select className="sd-select" value={itemSelection} onChange={(e) => setItemSelection(e.target.value)}>
               {masterCatalog[catSelection].map(item => <option key={item} value={item}>{item}</option>)}
             </select>
-            
             <div className="qty-control">
               <button className="qty-btn" onClick={() => setCatalogQty(Math.max(1, catalogQty - 1))}>-</button>
               <input type="number" className="sd-input qty-input" value={catalogQty} onChange={(e) => setCatalogQty(parseInt(e.target.value)||1)} />
@@ -435,14 +418,7 @@ export default function App() {
 
           <div className="bed-section" style={{ backgroundColor: '#fce7b1' }}>
             <div className="bed-header" style={{ backgroundColor: '#823c11' }}>Custom Item Request</div>
-            <input 
-              type="text" 
-              className="sd-input" 
-              style={{ marginBottom: '15px' }} 
-              placeholder="e.g. Garden Hose, Snips" 
-              value={customName}
-              onChange={(e) => setCustomName(e.target.value)}
-            />
+            <input type="text" className="sd-input" style={{ marginBottom: '15px' }} placeholder="e.g. Garden Hose, Snips" value={customName} onChange={(e) => setCustomName(e.target.value)} />
             <div className="qty-control">
               <button className="qty-btn" onClick={() => setCustomQty(Math.max(1, customQty - 1))}>-</button>
               <input type="number" className="sd-input qty-input" value={customQty} onChange={(e) => setCustomQty(parseInt(e.target.value)||1)} />
@@ -457,29 +433,19 @@ export default function App() {
               <div style={{ textAlign: 'center', color: '#ffe5a9', padding: '20px', fontSize: '22px' }}>Your cart is empty.</div>
             ) : (
               Object.entries(shoppingList).map(([itemName, data]) => (
-                <div 
-                  key={itemName} 
-                  className={`shop-item ${data.checked ? 'checked' : ''}`}
-                  onClick={() => toggleShopItem(itemName)}
-                >
+                <div key={itemName} className={`shop-item ${data.checked ? 'checked' : ''}`} onClick={() => toggleShopItem(itemName)}>
                   <span>{itemName}</span>
                   <span className="shop-qty-badge">x{data.quantity}</span>
                 </div>
               ))
             )}
-            
             {Object.values(shoppingList).some(item => item.checked) && (
-              <button className="btn-action" style={{ background: '#d62828', width: '100%', marginTop: '20px' }} onClick={clearCheckedItems}>
-                🗑️ Clear Checked Items
-              </button>
+              <button className="btn-action" style={{ background: '#d62828', width: '100%', marginTop: '20px' }} onClick={clearCheckedItems}>🗑️ Clear Checked Items</button>
             )}
           </div>
         </div>
       )}
 
-      {/* ========================================== */}
-      {/* GARDEN PLANNER VIEW */}
-      {/* ========================================== */}
       {currentView === 'planner' && (
         <>
           {weatherData && (
@@ -492,7 +458,6 @@ export default function App() {
                 </div>
                 <div style={{fontSize: '36px', paddingRight: '10px'}}>📍</div>
               </div>
-              
               <div className="weather-hourly-container">
                 {weatherData.hourly.map((hour, i) => (
                   <div key={i} className="weather-hour-block">
@@ -524,7 +489,6 @@ export default function App() {
         </>
       )}
 
-      {/* FIELD GUIDE MODAL */}
       {showFieldGuide && (
         <div className="modal-overlay" onClick={() => setShowFieldGuide(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -532,12 +496,14 @@ export default function App() {
             <div className="modal-body" style={{ textAlign: 'left' }}>
               <div className="info-box-title" style={{ color: '#d62828', borderBottom: '3px dotted #823c11', paddingBottom: '5px' }}>The 3-Step Seed Watering Strategy</div>
               <p><strong>1. The Pre-Soak:</strong> Before placing a single seed in the ground, the bed must be flooded. Dry soil wicks moisture away from the delicate seed coat. Soak the bed thoroughly the evening before planting.</p>
-              <p><strong>2. The Cardboard Trick:</strong> Seeds like carrots and radishes are incredibly shallow and dry out in hours under direct sun. After direct sowing and misting the surface, lay a piece of plain brown cardboard directly over the dirt. This traps 100% of the moisture. Lift it daily to check for sprouts.</p>
-              <p><strong>3. The Weaning Phase:</strong> Once germinated, remove the cardboard immediately. Transition from daily surface misting to deeper waterings every 2-3 days to force the young roots to dive downward in search of moisture.</p>
+              <p><strong>2. The Vermiculite Top-Coat:</strong> Seeds like carrots and radishes are incredibly shallow and dry out in hours under direct sun. Instead of burying them, press them into the surface and top with a thin layer of vermiculite. Mist this layer daily; it acts as a sponge to trap moisture against the seed coat.</p>
+              <p><strong>3. The Weaning Phase:</strong> Once germinated, transition from daily surface misting to deeper waterings every 2-3 days to force the young roots to dive downward in search of moisture.</p>
+              
               <div className="info-box-title" style={{ color: '#2b4a24', borderBottom: '3px dotted #823c11', paddingBottom: '5px', marginTop: '30px' }}>Drip Irrigation Master Rules</div>
               <p><strong>Macro Rule 1 (Deep Root Soaking):</strong> Frequent, shallow watering creates weak, surface-level root systems that panic during a heatwave. The goal of the drip system is to run for longer periods (30-45 minutes depending on emitter flow) but less frequently (every 3-4 days), soaking the soil a full 8-12 inches down.</p>
               <p><strong>Macro Rule 2 (The Late-Summer Stress):</strong> For fruiting crops like Tomatoes and Peppers, water is your enemy in late August. Once the fruit has set and reached full size, cut your watering volume by 50%. This mild drought stress forces the plant to stop producing leaves and concentrate all its sugars into ripening the fruit, dramatically increasing flavor and spice.</p>
               <p><strong>Macro Rule 3 (The Allium Halt):</strong> Onions are susceptible to rot. When the green tops of your onions flop over onto the soil (usually mid-summer), their growing cycle is finished. You must stop watering that bed entirely to allow the bulbs to cure in the dry dirt before harvesting.</p>
+              
               <div className="info-box-title" style={{ color: '#823c11', borderBottom: '3px dotted #823c11', paddingBottom: '5px', marginTop: '30px' }}>Fertilization Master Rules</div>
               <p><strong>Rule 1 (The Seed Battery):</strong> NEVER fertilize seeds when direct sowing. A seed is a self-contained battery pack that has all the nutrients it needs. Adding fertilizer to a seed will chemically burn the emerging root. Wait 10-14 days until the first "True Leaves" appear.</p>
               <p><strong>Rule 2 (The Transplant Trench):</strong> When planting nursery starts (Tomatoes, Peppers), place a small scoop of organic fertilizer at the very bottom of your hole. Cover it with an inch of plain dirt, then place the plant. The roots will discover the food naturally as they grow downward without suffering chemical shock.</p>
@@ -547,7 +513,6 @@ export default function App() {
         </div>
       )}
 
-      {/* EVOLVING PLANT MODAL */}
       {selectedPlant && info && (
         <div className="modal-overlay" onClick={() => setSelectedPlant(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -590,7 +555,6 @@ export default function App() {
         </div>
       )}
 
-      {/* BED MODAL */}
       {selectedBed && bedInfo && (
         <div className="modal-overlay" onClick={() => setSelectedBed(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
