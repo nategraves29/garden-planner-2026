@@ -1,7 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './firebase';
 import { doc, setDoc, onSnapshot } from 'firebase/firestore';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import './App.css';
+
+// ==========================================
+// GEMINI API CONFIGURATION
+// ==========================================
+const API_KEY = "AIzaSyDp1YBG0MWZzgcaPJ3uYfpt0zrMWkZ4BH8"; // PASTE YOUR KEY HERE
+const genAI = new GoogleGenerativeAI(API_KEY);
+
+const fileToGenerativePart = async (file) => {
+  const base64EncodedDataPromise = new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result.split(',')[1]);
+    reader.readAsDataURL(file);
+  });
+  return {
+    inlineData: { data: await base64EncodedDataPromise, mimeType: file.type },
+  };
+};
 
 // ==========================================
 // DATABASES & CATALOGS
@@ -261,6 +279,10 @@ export default function App() {
   const [customName, setCustomName] = useState("");
   const [customQty, setCustomQty] = useState(1);
 
+  // PLANT DOCTOR STATES
+  const [doctorLoading, setDoctorLoading] = useState(false);
+  const [doctorResult, setDoctorResult] = useState(null);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeData({ season: getStardewSeason(), realTime: getRealDateTime() });
@@ -361,6 +383,29 @@ export default function App() {
     const currentData = { ...shoppingList };
     Object.keys(currentData).forEach(key => { if (currentData[key].checked) delete currentData[key]; });
     await setDoc(doc(db, "gardenData", "shoppingList"), currentData);
+  };
+
+  // GEMINI AI CALL
+  const runPlantDoctor = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setDoctorLoading(true);
+    setDoctorResult(null);
+
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const prompt = `You are an expert Oregon organic gardener. Examine this image of my ${selectedPlant}. Identify any diseases, pests, or nutrient deficiencies. Provide a brief diagnosis and 3 step-by-step organic, pet-safe remedies to fix it. Keep it concise.`;
+      
+      const imagePart = await fileToGenerativePart(file);
+      const result = await model.generateContent([prompt, imagePart]);
+      
+      setDoctorResult(result.response.text());
+    } catch (error) {
+      setDoctorResult("Error: Could not analyze the image. Make sure your API key is correct.");
+      console.error(error);
+    }
+    setDoctorLoading(false);
   };
 
   // UPDATED ROSTERS
@@ -514,9 +559,12 @@ export default function App() {
       )}
 
       {selectedPlant && info && (
-        <div className="modal-overlay" onClick={() => setSelectedPlant(null)}>
+        <div className="modal-overlay" onClick={() => {
+          setSelectedPlant(null);
+          setDoctorResult(null); // Clear doctor result when closing
+        }}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">{info.name} <button className="close-btn" onClick={() => setSelectedPlant(null)}>X</button></div>
+            <div className="modal-header">{info.name} <button className="close-btn" onClick={() => { setSelectedPlant(null); setDoctorResult(null); }}>X</button></div>
             <div className="modal-body">
               {!isPlanted && info.method !== "-" && info.method !== "INFRASTRUCTURE" ? (
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -526,10 +574,30 @@ export default function App() {
               ) : (
                 <>
                   {info.method !== "-" && info.method !== "INFRASTRUCTURE" && (
-                    <div style={{ textAlign: 'center', marginBottom: '20px', fontWeight: 'bold', color: '#f5cc85', background: '#2b4a24', padding: '12px', border: '4px solid #36141a', fontSize: '24px', boxShadow: 'inset 4px 4px 0px rgba(255,255,255,0.2)' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '10px', fontWeight: 'bold', color: '#f5cc85', background: '#2b4a24', padding: '12px', border: '4px solid #36141a', fontSize: '24px', boxShadow: 'inset 4px 4px 0px rgba(255,255,255,0.2)' }}>
                       Current Phase: {activePhase.name} (Day {plantAge})
                     </div>
                   )}
+                  
+                  {/* PLANT DOCTOR BUTTON */}
+                  {info.method !== "-" && info.method !== "INFRASTRUCTURE" && (
+                    <div className="action-buttons" style={{ marginBottom: '15px' }}>
+                      <label className="btn-action" style={{ background: '#d4a055', width: '100%', textAlign: 'center', display: 'block', cursor: 'pointer', color: '#36141a' }}>
+                        📸 Plant Doctor
+                        <input type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={runPlantDoctor} />
+                      </label>
+                    </div>
+                  )}
+
+                  {/* DOCTOR LOADING/RESULT AREA */}
+                  {doctorLoading && <div style={{ padding: '10px', textAlign: 'center', color: '#d62828', fontFamily: 'VT323', fontSize: '22px' }}>Analyzing plant tissue... 🔬</div>}
+                  {doctorResult && (
+                    <div className="info-box" style={{ background: '#ebd9c8', borderColor: '#d62828', marginBottom: '15px' }}>
+                      <div className="info-box-title" style={{ color: '#d62828' }}>🩺 Diagnosis & Remedy</div>
+                      <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '1.4', color: '#36141a' }}>{doctorResult}</div>
+                    </div>
+                  )}
+
                   <div className="action-buttons">
                     <button className="btn-action water" onClick={() => markAction(info.name, 'watered')}>💦 Watered</button>
                     <button className="btn-action feed" onClick={() => markAction(info.name, 'fed')}>🧪 Fed</button>
