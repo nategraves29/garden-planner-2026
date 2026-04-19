@@ -394,7 +394,7 @@ export default function App() {
     setDoctorResult(null);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
       const prompt = `You are an expert Oregon organic gardener. Examine this image of my ${selectedPlant}. Identify any diseases, pests, or nutrient deficiencies. Provide a brief diagnosis and 3 step-by-step organic, pet-safe remedies to fix it. Keep it concise.`;
       
       const imagePart = await fileToGenerativePart(file);
