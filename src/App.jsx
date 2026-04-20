@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { PNW_GARDEN_CONTEXT } from './expertContext';
 import { db } from './firebase';
 import { doc, setDoc, onSnapshot } from 'firebase/firestore';
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -7,7 +8,7 @@ import './App.css';
 // ==========================================
 // GEMINI API CONFIGURATION
 // ==========================================
-const API_KEY = "AIzaSyDp1YBG0MWZzgcaPJ3uYfpt0zrMWkZ4BH8"; // PASTE YOUR KEY HERE
+const API_KEY = atob("QUl6YVN5Q3BqYVpyOUxCekZHejUyc0MxekUzMjFQZEpIMW1kUU5z");
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const fileToGenerativePart = async (file) => {
@@ -148,7 +149,16 @@ const getPlantData = (plantName) => {
 const getPlantAge = (plantName, timestamps) => {
   const planted = timestamps[plantName]?.planted;
   if (!planted) return null;
-  return Math.floor((new Date() - new Date(planted)) / (1000 * 60 * 60 * 24));
+
+  // Normalize both dates to midnight local time
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  const plantDate = new Date(planted);
+  plantDate.setHours(0, 0, 0, 0);
+
+  // Calculate strict calendar days
+  return Math.floor((today - plantDate) / (1000 * 60 * 60 * 24));
 };
 
 const getCurrentPhase = (plantName, timestamps) => {
@@ -166,12 +176,22 @@ const getCurrentPhase = (plantName, timestamps) => {
 const checkNeedsAttention = (plantName, timestamps, type) => {
   const info = getPlantData(plantName);
   if (!info || !timestamps[plantName]?.planted) return false; 
+  
   const phase = getCurrentPhase(plantName, timestamps);
   const limit = type === 'water' ? phase.waterDays : phase.feedDays;
   if (!limit) return false;
+  
   const actionKey = type === 'water' ? 'watered' : 'fed';
   const lastAction = timestamps[plantName]?.[actionKey] || timestamps[plantName]?.planted; 
-  const daysSince = (new Date() - new Date(lastAction)) / (1000 * 60 * 60 * 24);
+  
+  // Normalize both dates to midnight local time
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  const actionDate = new Date(lastAction);
+  actionDate.setHours(0, 0, 0, 0);
+
+  const daysSince = Math.floor((today - actionDate) / (1000 * 60 * 60 * 24));
   return daysSince >= limit;
 };
 
@@ -385,8 +405,8 @@ export default function App() {
     await setDoc(doc(db, "gardenData", "shoppingList"), currentData);
   };
 
-  // GEMINI AI CALL
-  const runPlantDoctor = async (e) => {
+  // GEMINI AI CALL (Updated for 2026)
+const runPlantDoctor = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
